@@ -1,0 +1,65 @@
+@import url("https://fonts.googleapis.com/css2?family=Mulish:wght@500&display=swap");
+body {
+  background-image: url("https://freedesignfile.com/upload/2017/01/Light-blue-tech-background-vector-04.jpg");
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+  font-family: "Mulish", sans-serif;
+}
+::-webkit-scrollbar {
+  display: none;
+}
+.navbar-toggler,
+.navbar-toggler:focus,
+.navbar-toggler:active,
+.navbar-toggler-icon:focus {
+  outline: none;
+  border: none;
+  box-shadow: none;
+}
+#home {
+  height: 85vh;
+}
+#deal {
+  margin: 100px auto;
+}
+
+#deal .card-img-top {
+  padding: 5px;
+  height: 200px;
+  object-fit: contain;
+}
+.card {
+  margin: 10px 0px;
+}
+#category .card {
+  border: none;
+}
+#category .card-img-top {
+  height: 300px;
+  object-fit: cover;
+}
+
+footer .col-md-4 {
+  margin: 5px 0px;
+}
+.card:hover {
+  transition: 0.2s;
+  transform: translateY(-10px);
+}
+
+@media (max-width: 768px) {
+  #profile {
+    text-align: center;
+  }
+  #upper-row {
+    display: none;
+  }
+}
+.star {
+  cursor: pointer;
+}
+.card-img-top {
+  width: 100%;
+  height: 100%;
+}
