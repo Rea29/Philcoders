@@ -46,6 +46,7 @@ const App = () => (
       <Route path="/Login" element={<Login />} />
       <Route path="/Logtest" element={<Login />} />
       <Route path="/Logtest1" element={<Login />} />
+      <Route path="/Logtest2" element={<Login />} />
     </Routes>
     <Footer />
   </BrowserRouter>
