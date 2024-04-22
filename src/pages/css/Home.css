@@ -21,8 +21,10 @@
 .card-testimony {
   height: 250px;
 }
-.text-testimony {
-  text-decoration: underline;
+
+.card-category {
+  width: 300px;
 }
-.text-category {
+.img-category {
+  height: 300px;
 }

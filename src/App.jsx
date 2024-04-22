@@ -44,8 +44,6 @@ const App = () => (
       <Route path="/course-management" element={<CourseManagement />} />
       <Route path="/Carousel" element={<Carousel />} />
       <Route path="/Login" element={<Login />} />
-      <Route path="/Logtest" element={<Login />} />
-      <Route path="/Logtest1" element={<Login />} />
     </Routes>
     <Footer />
   </BrowserRouter>
