@@ -3,7 +3,7 @@ import "./css/Login.css";
 const Login = () => {
   return (
     <>
-      <div className="container my-2">
+      <div className="container my-2 mb-5 mt-4">
         <div className="row">
           <div
             className="col-md-6
