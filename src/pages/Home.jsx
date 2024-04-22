@@ -12,6 +12,14 @@ import pic6 from "../images/pic6.jpg";
 import pic7 from "../images/pic7.jpg";
 import pic8 from "../images/pic8.jpg";
 import pic9 from "../images/pic9.jpg";
+import Development from "../images/Development.png";
+import Business from "../images/Business.png";
+import Design from "../images/Design.png";
+import ITandSoftware from "../images/IT and Software.png";
+import Marketing from "../images/Marketing.png";
+import Music from "../images/Music.png";
+import PersonalDevelopment from "../images/Personal Development.png";
+import Photography from "../images/Photography.png";
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
@@ -164,10 +172,7 @@ const Home = () => {
         <Row xs={1} md={2} lg={3} className="g-4">
           <Col>
             <Card>
-              <Card.Img variant="top" />
-              <Card.Body>
-                <Card.Title>Sarah M.</Card.Title>
-              </Card.Body>
+              <Card.Img src="" />
             </Card>
           </Col>
         </Row>
