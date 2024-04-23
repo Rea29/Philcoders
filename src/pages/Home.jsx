@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Course from "../course/Course";
 import Carousel from "react-bootstrap/Carousel";
 import Container from "react-bootstrap/Container";
+import Button from "react-bootstrap/Button";
 import pic1 from "../images/pic1.jpg";
 import pic2 from "../images/pic2.jpg";
 import pic3 from "../images/pic3.jpg";
@@ -12,6 +13,7 @@ import pic6 from "../images/pic6.jpg";
 import pic7 from "../images/pic7.jpg";
 import pic8 from "../images/pic8.jpg";
 import pic9 from "../images/pic9.jpg";
+import pic10 from "../images/pic10.jpg";
 import Development from "../images/Development.png";
 import Business from "../images/Business.png";
 import Design from "../images/Design.png";
@@ -68,10 +70,11 @@ const Home = () => {
         </Link>
       </section>
       <Course />
-      <h2 className="text-testimony text-center mb-4">
-        How learners like you are achieving their goals
-      </h2>
+
       <Container className="mb-5">
+        <h2 className="fw-bold mb-5">
+          How learners like you are achieving their goals
+        </h2>
         <Row xs={1} md={2} lg={3} className="g-4">
           <Col>
             <Card>
@@ -170,8 +173,8 @@ const Home = () => {
           </Col>
         </Row>
       </Container>
-      <Container>
-        <h2 className="text-category mb-4">Top categories</h2>
+      <Container className=" mb-5">
+        <h2 className="fw-bold mb-4">Top categories</h2>
         <Row xs={1} md={2} lg={4} className="g-4">
           <Col>
             <Card className="card-category">

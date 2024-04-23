@@ -17,7 +17,9 @@
 .card-img-top {
   height: 300px !important;
   object-fit: cover;
+  border-radius: 50%;
 }
+
 .card-testimony {
   height: 250px;
 }
@@ -27,4 +29,8 @@
 }
 .img-category {
   height: 300px;
+}
+.img-upskill {
+  float: right;
+  width: 40%;
 }
