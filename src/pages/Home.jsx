@@ -3,7 +3,10 @@ import { Link } from "react-router-dom";
 import Course from "../course/Course";
 import Carousel from "react-bootstrap/Carousel";
 import Container from "react-bootstrap/Container";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faQuoteLeft } from "@fortawesome/free-solid-svg-icons";
 import Button from "react-bootstrap/Button";
+import Image from "react-bootstrap/Image";
 import pic1 from "../images/pic1.jpg";
 import pic2 from "../images/pic2.jpg";
 import pic3 from "../images/pic3.jpg";
@@ -13,7 +16,6 @@ import pic6 from "../images/pic6.jpg";
 import pic7 from "../images/pic7.jpg";
 import pic8 from "../images/pic8.jpg";
 import pic9 from "../images/pic9.jpg";
-import pic10 from "../images/pic10.jpg";
 import Development from "../images/Development.png";
 import Business from "../images/Business.png";
 import Design from "../images/Design.png";
@@ -34,7 +36,7 @@ const Home = () => {
       <Carousel>
         <Carousel.Item className="position-relative">
           <div className="carousel-overlay"></div>
-          <img className="carousel-img" src={pic1} />
+          <Image className="carousel-img" src={pic1} />
           <Carousel.Caption>
             <h3>
               You've started a journey where every step forward is a triumph.
@@ -43,7 +45,7 @@ const Home = () => {
         </Carousel.Item>
         <Carousel.Item className="position-relative">
           <div className="carousel-overlay"></div>
-          <img className="carousel-img" src={pic2} />
+          <Image className="carousel-img" src={pic2} />
           <Carousel.Caption>
             <h3>
               Challenges may arise, but remember, they are the raw material for
@@ -53,7 +55,7 @@ const Home = () => {
         </Carousel.Item>
         <Carousel.Item className="position-relative">
           <div className="carousel-overlay"></div>
-          <img className="carousel-img" src={pic3} />
+          <Image className="carousel-img" src={pic3} />
           <Carousel.Caption>
             <h3>
               Challenges may arise, but remember, they are the raw material for
@@ -66,11 +68,9 @@ const Home = () => {
         <h1 className="display-4 fw-bold">WELCOME TO ℘hilCoders </h1>
         <p className="fs-4 fw-bold">Code Your Dreams Into Reality!</p>
         <Link to="/course">
-          <button className="btn btn-primary mt-2">GET STARTED NOW!</button>
+          <Button className="btn btn-primary mt-2">GET STARTED NOW!</Button>
         </Link>
       </section>
-      <Course />
-
       <Container className="mb-5">
         <h2 className="fw-bold mb-5">
           How learners like you are achieving their goals
@@ -82,7 +82,9 @@ const Home = () => {
               <Card.Body className="card-testimony">
                 <Card.Title className="fw-bold">Sarah M.</Card.Title>
                 <Card.Text>
-                  -PhilCoders has been a game-changer for me! The courses are so
+                  <FontAwesomeIcon icon={faQuoteLeft} />
+                  <br />
+                  PhilCoders has been a game-changer for me! The courses are so
                   well-structured and easy to follow. I've learned everything
                   from coding to digital marketing, and I'm already applying
                   these skills in my job. Highly recommend.
@@ -96,7 +98,8 @@ const Home = () => {
               <Card.Body className="card-testimony">
                 <Card.Title className="fw-bold">Emily S.</Card.Title>
                 <Card.Text>
-                  -I was skeptical about online learning at first, but
+                  <FontAwesomeIcon icon={faQuoteLeft} />
+                  <br />I was skeptical about online learning at first, but
                   PhilCoders exceeded my expectations. The instructors are
                   knowledgeable and engaging, and the platform is user-friendly.
                   I've completed several courses on PhilCoders, including
@@ -112,7 +115,9 @@ const Home = () => {
               <Card.Body className="card-testimony">
                 <Card.Title className="fw-bold">John D.</Card.Title>
                 <Card.Text>
-                  -As someone with a full-time job and a busy schedule,
+                  <FontAwesomeIcon icon={faQuoteLeft} />
+                  <br />
+                  As someone with a full-time job and a busy schedule,
                   PhilCoders has been a lifesaver. The flexibility to learn at
                   my own pace and the affordability of the courses are
                   unbeatable. I've taken courses on graphic design and project
@@ -128,7 +133,9 @@ const Home = () => {
               <Card.Body className="card-testimony">
                 <Card.Title className="fw-bold">Rachel K.</Card.Title>
                 <Card.Text>
-                  -PhilCoders has revolutionized the way I learn. The variety of
+                  <FontAwesomeIcon icon={faQuoteLeft} />
+                  <br />
+                  PhilCoders has revolutionized the way I learn. The variety of
                   courses available is astounding, and the quality of
                   instruction is top-notch. I've taken courses on PhilCoders
                   ranging from business strategy to personal development, and
@@ -145,10 +152,12 @@ const Home = () => {
               <Card.Body className="card-testimony">
                 <Card.Title className="fw-bold">David L.</Card.Title>
                 <Card.Text>
-                  -PhilCoders has opened up a world of possibilities for me.
-                  I've always been interested in learning new things, but I
-                  didn't have the time or resources to pursue formal education.
-                  With PhilCoders, I can explore a wide range of topics from the
+                  <FontAwesomeIcon icon={faQuoteLeft} />
+                  <br />
+                  PhilCoders has opened up a world of possibilities for me. I've
+                  always been interested in learning new things, but I didn't
+                  have the time or resources to pursue formal education. With
+                  PhilCoders, I can explore a wide range of topics from the
                   comfort of my home. Whether it's learning to play the guitar
                   or mastering Excel, PhilCoders has something for everyone.
                 </Card.Text>
@@ -161,12 +170,13 @@ const Home = () => {
               <Card.Body className="card-testimony">
                 <Card.Title className="fw-bold">Amanda R.</Card.Title>
                 <Card.Text>
-                  -I can't thank PhilCoders enough for helping me transition
-                  into a new career. After taking courses in web development and
-                  digital marketing, I was able to land a job in the tech
-                  industry. The skills I learned on PhilCoders have been
-                  invaluable, and I'm excited to continue my learning journey
-                  with them.
+                  <FontAwesomeIcon icon={faQuoteLeft} />
+                  <br />I can't thank PhilCoders enough for helping me
+                  transition into a new career. After taking courses in web
+                  development and digital marketing, I was able to land a job in
+                  the tech industry. The skills I learned on PhilCoders have
+                  been invaluable, and I'm excited to continue my learning
+                  journey with them.
                 </Card.Text>
               </Card.Body>
             </Card>
