@@ -4,7 +4,7 @@ import Navbar from "react-bootstrap/Navbar";
 import Button from "react-bootstrap/esm/Button";
 import Form from "react-bootstrap/Form";
 import NavbarStudents from "./navbarstudents";
-import NavbarInstructor from "./NavbarInstructor";
+import NavbarInstructor from "./navbarinstructor";
 import NavBarHome from "./navbarhome";
 import React, { useState, useEffect } from "react";
 import axios from "axios"; //npm install axios --save
