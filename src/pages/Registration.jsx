@@ -14,11 +14,20 @@ const Registration = (props) => {
       : "",
     email: props.RegistrationData ? props.RegistrationData.email : "",
     password: props.RegistrationData ? props.RegistrationData.password : "",
+    user_type: props.RegistrationData ? props.RegistrationData.user_type : "",
   });
   const { email, password } = RegistrationData;
   const RegistrationFunc = async (event) => {
     event.preventDefault();
-    const values = [name, lastname, birthday, contactnumber, email, password];
+    const values = [
+      name,
+      lastname,
+      birthday,
+      contactnumber,
+      email,
+      password,
+      user_type,
+    ];
     let errorMsg = "";
     console.log();
 
@@ -30,6 +39,7 @@ const Registration = (props) => {
         contactnumber: RegistrationData.contactnumber,
         email: RegistrationData.email,
         password: RegistrationData.password,
+        user_type: RegistrationData.user_type,
       })
       .then(function (response) {
         console.log(response.data);

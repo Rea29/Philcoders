@@ -34,9 +34,7 @@ function samplenav() {
             <Nav.Link href="/course">Courses</Nav.Link>
             <Nav.Link href="/about">About Us</Nav.Link>
             <Nav.Link href="/contact">Contact Us</Nav.Link>
-         
-           
-            
+
           </Nav>
         </Navbar.Collapse>
         <Navbar.Collapse className="justify-content-end">
