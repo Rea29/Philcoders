@@ -242,14 +242,14 @@ const Registration = (props) => {
                     onChange={handleInputChange}
                   </Form.Select>
                   <br />
-                  <div className="mb-3">
+                  {/* <div className="mb-3">
                     <input
                       type="checkbox"
                       id="forgetpassword?"
                       name="forgetpassword?"
                     ></input>
                     <label className="m-2">Forget Password?</label>
-                  </div>
+                  </div> */}
 
                   <button type="submit" className="btn btn-primary mt-2">
                     Submit

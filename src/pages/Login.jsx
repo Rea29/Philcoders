@@ -147,7 +147,14 @@ const Login = (props) => {
               </Form.Select>
               <br />
               <br /> */}
-
+            <div className="mb-3">
+              <input
+                type="checkbox"
+                id="forgetpassword?"
+                name="forgetpassword?"
+              ></input>
+              <label className="m-2">Forget Password?</label>
+            </div>
             <Button variant="primary" type="submit" className="submit-btn">
               Login
             </Button>
