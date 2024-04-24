@@ -1,4 +1,7 @@
 import React from "react";
+import Image from "react-bootstrap/Image";
+import pic10 from "../images/pic10.jpg";
+import pic11 from "../images/pic11.jpg";
 
 const About = () => (
   <div className="bg-light">
@@ -28,6 +31,13 @@ const About = () => (
             pursue a PhilCoders bootcamp to help sharpen your skills with
             hands-on coding exercises, projects and quizzes.
           </p>
+          <h5>Founders:</h5>
+          <div className="img-founders">
+            <Image src={pic10} />
+            <p>Mrs. Realyn Damasco</p>
+            <Image src={pic11} />
+            <p>Mr. Mar Jayson Manzano</p>
+          </div>
         </div>
       </div>
     </div>
