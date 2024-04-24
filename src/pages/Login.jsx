@@ -7,7 +7,10 @@ import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Alert from "react-bootstrap/Alert";
+import { useNavigate } from "react-router-dom";
+
 const Login = (props) => {
+  const navigate = useNavigate();
   const [loginData, setLoginData] = useState({
     email: props.loginData ? props.loginData.email : "",
     password: props.loginData ? props.loginData.password : "",
@@ -54,7 +57,7 @@ const Login = (props) => {
         }
       )
       .then(function (response) {
-        localStorage.removeItem("token");
+        // localStorage.setItem("token");
         console.log(response.data);
         if (response.data.isError) {
           setErrorMessage(String(response.data.message));
@@ -64,7 +67,7 @@ const Login = (props) => {
           setLoginResponseData(response.data);
 
           console.log("token ", localStorage.getItem("token"));
-          setShow(true);
+          window.location = "/";
         }
         // alert(response.data.message);
       })
@@ -144,7 +147,14 @@ const Login = (props) => {
               </Form.Select>
               <br />
               <br /> */}
-
+            <div className="mb-3">
+              <input
+                type="checkbox"
+                id="forgetpassword?"
+                name="forgetpassword?"
+              ></input>
+              <label className="m-2">Forget Password?</label>
+            </div>
             <Button variant="primary" type="submit" className="submit-btn">
               Login
             </Button>

@@ -27,7 +27,7 @@ const App = () => (
     <Navbar />
 
     <Routes>
-      <Route path="/" element={<Home />} />
+      <Route path="/" forceRefresh={true} element={<Home />} />
       <Route path="/create-course-example" element={<CourseForm />} />
       <Route path="/create-course" element={<CreateCourse />} />
       <Route path="/edit-course/:courseId" element={<EditCourseForm />} />
