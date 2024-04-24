@@ -88,9 +88,9 @@ const Home = () => {
         </Link>
       </section> */}
       <Container className="mb-5">
-        <h2 className="fw-bold mb-5">
+        <h1 className="fw-bold mb-5">
           How learners like you are achieving their goals
-        </h2>
+        </h1>
         <Row xs={1} md={2} lg={3} className="g-4">
           <Col>
             <Card>
