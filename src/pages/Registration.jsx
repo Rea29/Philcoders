@@ -1,23 +1,35 @@
 import React from "react";
 import "./css/Login.css";
+import { useEffect, useState } from "react";
+import Form from "react-bootstrap/Form";
 import axios from "axios";
 
-const Login = (props) => {
-  const [loginData, setLoginData] = useState({
-    email: props.loginData ? props.loginData.email : "",
-    password: props.loginData ? props.loginData.password : "",
+const Registration = (props) => {
+  const [RegistrationData, setRegistrationData] = useState({
+    name: props.RegistrationData ? props.RegistrationData.name : "",
+    lastname: props.RegistrationData ? props.RegistrationData.lastname : "",
+    birthday: props.RegistrationData ? props.RegistrationData.birthday : "",
+    contactnumber: props.RegistrationData
+      ? props.RegistrationData.contactnumber
+      : "",
+    email: props.RegistrationData ? props.RegistrationData.email : "",
+    password: props.RegistrationData ? props.RegistrationData.password : "",
   });
-  const { email, password } = loginData;
-  const loginFunc = async (event) => {
+  const { email, password } = RegistrationData;
+  const RegistrationFunc = async (event) => {
     event.preventDefault();
-    const values = [email, password];
+    const values = [name, lastname, birthday, contactnumber, email, password];
     let errorMsg = "";
-    console.log(course);
+    console.log();
 
     axios
-      .post("http://localhost:8000/api/login", {
-        email: loginData.email,
-        password: loginData.password,
+      .post("http://localhost:8000/api/register", {
+        name: RegistrationData.name,
+        lastname: RegistrationData.lastname,
+        birthday: RegistrationData.birthday,
+        contactnumber: RegistrationData.contactnumber,
+        email: RegistrationData.email,
+        password: RegistrationData.password,
       })
       .then(function (response) {
         console.log(response.data);
@@ -39,12 +51,24 @@ const Login = (props) => {
             className="col-md-6
            mx-auto px-3 py-5 bg-light rounded"
           >
-            <h1 className="text-center mb-3">Login</h1>
+            <h1 className="text-center mb-3">Registration Form</h1>
             <p className="text-center">
               New to our site? Sign up today and start enjoying the benefits of
               being a valued customer.
             </p>
             <form>
+              <Form.Select
+                aria-label="Default select example"
+                name="user_type"
+                value={user_type}
+                onChange={handleInputChange}
+              >
+                <option>Select User Type</option>
+                <option value="student">Student</option>
+                <option value="instructor">Instructor</option>
+              </Form.Select>
+              <br />
+              <br />
               <div className="mb-3">
                 <label htmlFor="emailaddress" className="form-label fw-bold">
                   Email address:
@@ -92,4 +116,4 @@ const Login = (props) => {
   );
 };
 
-export default Login;
+export default Registration;
