@@ -37,13 +37,29 @@ const Home = () => {
         <Carousel.Item className="position-relative">
           <div className="carousel-overlay"></div>
           <Image className="carousel-img" src={pic1} />
+          <Carousel.Caption className="mb-5">
+            <h1 className="display-4 fw-bold">WELCOME TO ℘hilCoders </h1>
+            <p className="fs-4 fw-bold">Code Your Dreams Into Reality!</p>
+            <Link to="/course">
+              <Button className="mb-5 btn btn-primary mt-2">
+                GET STARTED NOW!
+              </Button>
+            </Link>
+          </Carousel.Caption>
+        </Carousel.Item>
+      </Carousel>
+
+      {/* <Carousel>
+        <Carousel.Item className="position-relative">
+          <div className="carousel-overlay"></div>
+          <Image className="carousel-img" src={pic1} />
           <Carousel.Caption>
             <h3>
               You've started a journey where every step forward is a triumph.
             </h3>
           </Carousel.Caption>
-        </Carousel.Item>
-        <Carousel.Item className="position-relative">
+        </Carousel.Item> */}
+      {/* <Carousel.Item className="position-relative">
           <div className="carousel-overlay"></div>
           <Image className="carousel-img" src={pic2} />
           <Carousel.Caption>
@@ -62,15 +78,15 @@ const Home = () => {
               growth and resilience.
             </h3>
           </Carousel.Caption>
-        </Carousel.Item>
-      </Carousel>
-      <section className="d-flex flex-column text-center mt-5" id="home">
+        </Carousel.Item> */}
+      {/* </Carousel> */}
+      {/* <section className="d-flex flex-column text-center mt-5" id="home">
         <h1 className="display-4 fw-bold">WELCOME TO ℘hilCoders </h1>
         <p className="fs-4 fw-bold">Code Your Dreams Into Reality!</p>
         <Link to="/course">
           <Button className="btn btn-primary mt-2">GET STARTED NOW!</Button>
         </Link>
-      </section>
+      </section> */}
       <Container className="mb-5">
         <h2 className="fw-bold mb-5">
           How learners like you are achieving their goals
