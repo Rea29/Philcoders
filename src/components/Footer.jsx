@@ -17,6 +17,7 @@ const Footer = () => (
             Bootstrap, JavaScript, PHP, Android, SQL and Algorithm.
           </p>
         </div>
+
         {
           <div className="d-flex align-items-center justify-content-center text-decoration-none mx-auto py-2">
             <a href="https://www.facebook.com/profile.php?id=61557571280565&mibextid=ZbWKwL">

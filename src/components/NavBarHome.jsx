@@ -30,14 +30,14 @@ function samplenav() {
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mx-5">
             <Nav.Link href="/">Home</Nav.Link>
-            <Nav.Link href="/course-management">Course Management</Nav.Link>
-            <Nav.Link href="/course">Courses</Nav.Link>
+
             <Nav.Link href="/about">About Us</Nav.Link>
             <Nav.Link href="/contact">Contact Us</Nav.Link>
           </Nav>
         </Navbar.Collapse>
         <Navbar.Collapse className="justify-content-end">
           <Nav.Link href="/login">Login</Nav.Link>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <Nav.Link href="/Registration">Register Now</Nav.Link>
         </Navbar.Collapse>
       </Container>

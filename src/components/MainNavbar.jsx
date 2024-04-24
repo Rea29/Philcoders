@@ -4,6 +4,8 @@ import Navbar from "react-bootstrap/Navbar";
 import Button from "react-bootstrap/esm/Button";
 import Form from "react-bootstrap/Form";
 import NavbarStudents from "./navbarstudents";
+import NavbarInstructor from "./NavbarInstructor";
+import NavBarHome from "./navbarhome";
 import React, { useState, useEffect } from "react";
 import axios from "axios"; //npm install axios --save
 import { Link, useNavigate, NavLink } from "react-router-dom";
@@ -17,11 +19,17 @@ function samplenav() {
   function RenderNavbar(user) {
     console.log("RenderNavbar", user);
     if (user.user) {
-      return <NavbarStudents name="Alex" />;
+      if (user.user.user_type == "student") {
+        return <NavbarStudents name={userData} />;
+      } else if (user.user.user_type === "instructor") {
+        return <NavbarInstructor name={userData} />;
+      }
     }
-    // return <NavBarHome />;
+
+    return <NavBarHome />;
   }
-  function getLoggedUserData() {
+  const getLoggedUserData = () => {
+    //function getLoggedUserData() {
     let headers = {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
       "Content-Type": "application/json",
@@ -39,7 +47,7 @@ function samplenav() {
           setUserData(response.data);
         });
     }
-  }
+  };
 
   return (
     <>{RenderNavbar(userData)}</>

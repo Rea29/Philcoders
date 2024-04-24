@@ -7,30 +7,50 @@ import React, { useState, useEffect } from "react";
 import axios from "axios"; //npm install axios --save
 
 function studentnavbar(props) {
-  const [prevScrollPos, setPrevScrollPos] = useState(window.pageYOffset);
-  const [visible, setVisible] = useState(true);
-
-  useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  });
-  function logout() {
+  const handleClick = (e) => {
+    e.preventDefault();
     let headers = {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
       "Content-Type": "application/json",
       Accept: "application/json",
     };
     axios
-      .get("http://localhost:8000/api/user-info", {
+      .post("http://localhost:8000/api/logout", null, {
         headers,
       })
       .then(function (response) {
         console.log(response.data);
         localStorage.removeItem("token");
+        window.location = "/";
       });
-  }
+  };
+  const [prevScrollPos, setPrevScrollPos] = useState(window.pageYOffset);
+  const [visible, setVisible] = useState(true);
+
+  useEffect(() => {
+    console.log("useEffect", props);
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  });
+
+  // function logout() {
+  //   let headers = {
+  //     Authorization: `Bearer ${localStorage.getItem("token")}`,
+  //     "Content-Type": "application/json",
+  //     Accept: "application/json",
+  //   };
+  //   axios
+  //     .get("http://localhost:8000/api/logout", {
+  //       headers,
+  //     })
+  //     .then(function (response) {
+  //       console.log(response.data);
+  //       // localStorage.removeItem("token");
+  //     });
+  // }
   const handleScroll = () => {
     const currentScrollPos = window.pageYOffset;
     setVisible(prevScrollPos > currentScrollPos || currentScrollPos === 0);
@@ -51,11 +71,13 @@ function studentnavbar(props) {
         </Navbar.Collapse>
         <Navbar.Collapse className="justify-content-end">
           <Navbar.Text>
-            Signed in as: <a href="#login">Realyn</a>
+            Signed in as:{" "}
+            <a href="" className="text-capitalize">
+              {props.name.user.name}
+              {props.name.user.user_type}
+            </a>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <Button href="" onClick={logout()}>
-              Logout
-            </Button>{" "}
+            <button onClick={handleClick}>Logout</button>
           </Navbar.Text>
         </Navbar.Collapse>
       </Container>
