@@ -11,17 +11,15 @@ export default function ListUser() {
   }, []);
 
   function getCourses() {
-    axios
-      .get("http://localhost/api/getAllCourses.php")
-      .then(function (response) {
-        console.log(response.data);
-        setCourses(response.data);
-      });
+    axios.get("http://localhost:8000/api/courses").then(function (response) {
+      console.log(response.data);
+      setCourses(response.data);
+    });
   }
 
   const deleteUser = (id) => {
     axios
-      .post("http://localhost/api/DeleteCourse.php", {
+      .post("http://localhost:8000/api/course/{id}", {
         CourseID: id,
       })
       .then(function (response) {
@@ -44,7 +42,9 @@ export default function ListUser() {
         <Link to="/create-course" className="btn btn-success">
           Add Course
         </Link>
-        <h1>List Users</h1>
+        <br />
+
+        <h1>Courses List</h1>
         <table className="table table-bordered table-striped">
           <thead>
             <tr>

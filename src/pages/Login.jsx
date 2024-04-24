@@ -54,14 +54,15 @@ const Login = (props) => {
         }
       )
       .then(function (response) {
+        localStorage.removeItem("token");
+        console.log(response.data);
         if (response.data.isError) {
-          console.log(response.data);
           setErrorMessage(String(response.data.message));
           setShowError(true);
         } else {
-          console.log(response.data);
-          setLoginResponseData(response.data);
           localStorage.setItem("token", response.data.token);
+          setLoginResponseData(response.data);
+
           console.log("token ", localStorage.getItem("token"));
           setShow(true);
         }
