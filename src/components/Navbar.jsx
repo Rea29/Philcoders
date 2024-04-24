@@ -34,22 +34,13 @@ function samplenav() {
             <Nav.Link href="/course">Courses</Nav.Link>
             <Nav.Link href="/about">About Us</Nav.Link>
             <Nav.Link href="/contact">Contact Us</Nav.Link>
-            {/* <Form className="d-flex mx-5">
-              <Form.Control
-                type="search"
-                placeholder="Search"
-                className="me-2"
-                aria-label="Search"
-              />
-              <Button variant="outline-success">Search</Button>
-            </Form>
-            <br /> */}
-            <Form className="d-flex mx-1" justify-content-end>
-              <Nav.Link href="/login">Login</Nav.Link>
-              <Nav.Link href="/Registration">Register Now</Nav.Link>
-            </Form>
+
           </Nav>
         </Navbar.Collapse>
+        <Navbar.Collapse className="justify-content-end">
+              <Nav.Link href="/login">Login</Nav.Link>
+              <Nav.Link href="/register">Register Now</Nav.Link>
+            </Navbar.Collapse>
       </Container>
     </Navbar>
   );
