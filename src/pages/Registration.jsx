@@ -138,22 +138,9 @@ const Registration = (props) => {
                 className="col-md-6
            mx-auto px-3 py-5 bg-light rounded"
               >
-                <h1 className="text-center mb-3">Philcoders</h1>
+                <h1 className="text-center mb-3">PHILCODERS</h1>
                 <p className="text-center">Online Registration Information!</p>
                 <form>
-                  <Form.Select
-                    aria-label="Default select example"
-                    name="user_type"
-                    value={user_type}
-                    onChange={handleInputChange}
-                  >
-                    <option>Select User Type</option>
-                    <option value="student">Student</option>
-                    <option value="instructor">Instructor</option>
-                    onChange={handleInputChange}
-                  </Form.Select>
-                  <br />
-                  <br />
                   <div className="mb-3">
                     <label htmlFor="name" className="form-label fw-bold">
                       First Name:
@@ -243,6 +230,18 @@ const Registration = (props) => {
                       required
                     ></input>
                   </div>
+                  <Form.Select
+                    aria-label="Default select example"
+                    name="user_type"
+                    value={user_type}
+                    onChange={handleInputChange}
+                  >
+                    <option>Select User Type</option>
+                    <option value="student">Student</option>
+                    <option value="instructor">Instructor</option>
+                    onChange={handleInputChange}
+                  </Form.Select>
+                  <br />
                   <div className="mb-3">
                     <input
                       type="checkbox"
