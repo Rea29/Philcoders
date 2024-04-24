@@ -16,12 +16,11 @@ import CourseList from "./components/CourseList";
 import EditCourse from "./components/EditCourse";
 import ListCourse from "./course/ListCourse";
 import CourseForm from "./components/CourseForm";
-
 import Carousel from "./pages/Carousel";
-
 import EditCourseForm from "./course/EditCourseForm";
 import CreateCourse from "./course/CreateCourse";
 import Login from "./pages/Login";
+import Registration from "./pages/Registration";
 
 const App = () => (
   <BrowserRouter>
@@ -44,7 +43,7 @@ const App = () => (
       <Route path="/course-management" element={<CourseManagement />} />
       <Route path="/Carousel" element={<Carousel />} />
       <Route path="/Login" element={<Login />} />
-
+        <Route path="/Registration" element={<Registration />} />
     </Routes>
     <Footer />
   </BrowserRouter>
