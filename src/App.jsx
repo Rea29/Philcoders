@@ -2,7 +2,7 @@ import React from "react";
 
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
-import Navbar from "./components/Navbar";
+import Navbar from "./components/MainNavbar";
 import Footer from "./components/Footer";
 import "./App.css";
 import Profile from "./pages/Profile";
@@ -43,7 +43,10 @@ const App = () => (
       <Route path="/course-management" element={<CourseManagement />} />
       <Route path="/Carousel" element={<Carousel />} />
       <Route path="/Login" element={<Login />} />
-        <Route path="/Registration" element={<Registration />} />
+      <Route path="/Registration" element={<Registration />} />
+      {/* <Route path="/MainNavbar" element={<MainNavbar />} />
+      <Route path="/NavbarInstructor" element={<NavbarInstructor />} />
+      <Route path="/NavbarStudents" element={<NavbarStudents />} /> */}
     </Routes>
     <Footer />
   </BrowserRouter>
