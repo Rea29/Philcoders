@@ -17,12 +17,20 @@
 .card-img-top {
   height: 300px !important;
   object-fit: cover;
+  border-radius: 50%;
 }
+
 .card-testimony {
-  height: 250px;
+  height: 300px;
 }
-.text-testimony {
-  text-decoration: underline;
+
+.card-category {
+  width: 300px;
 }
-.text-category {
+.img-category {
+  height: 300px;
+}
+.img-upskill {
+  float: right;
+  width: 40%;
 }
