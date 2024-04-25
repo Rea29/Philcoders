@@ -8,7 +8,7 @@ const Footer = () => (
       <div className="col-md-4 d-flex  justify-content-center gap-2 fs-5">
         <div className="col-sm-12 col-md-6">
           <h2>About</h2>
-          <p className="text-justify">
+          <p className="">
             Philcoders <i>CODE WANTS TO BE SIMPLE </i> is an initiative to help
             the upcoming programmers with the code. Scanfcode focuses on
             providing the most efficient code or snippets as the code wants to
@@ -39,7 +39,7 @@ const Footer = () => (
         }
       </div>
       <div className="col-md-4 text-center">
-        <p className="text-sm">Designed and developed By PhilCoders</p>
+        <p className="text-sm fw-bold">Designed and developed By PhilCoders</p>
       </div>
     </div>
   </footer>

@@ -30,3 +30,18 @@
 .img-category {
   height: 300px;
 }
+.img-business {
+  height: 500px;
+  width: 700px;
+  object-fit: cover;
+  float: right;
+}
+.business-cont {
+  height: 500px;
+}
+.text-business {
+  padding-top: 100px;
+}
+li {
+  font-size: larger;
+}

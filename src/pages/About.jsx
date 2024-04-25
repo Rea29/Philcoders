@@ -3,9 +3,10 @@ import Image from "react-bootstrap/Image";
 import pic10 from "../images/pic10.jpg";
 import pic11 from "../images/pic11.jpg";
 
+import "./css/About.css";
 const About = () => (
   <div className="bg-light">
-    <div className=" py-5 container">
+    <div className="mt-5 container mb-5">
       <div className="row g-4 py-2 align-items-center">
         <div className="col-md-4 text-center">
           <img
@@ -13,7 +14,7 @@ const About = () => (
             className="img-fluid rounded"
             alt="about pic"
             loading="lazy"
-            width={300}
+            // width={300}
           />
         </div>
         <div className="col-md-8">
@@ -31,12 +32,12 @@ const About = () => (
             pursue a PhilCoders bootcamp to help sharpen your skills with
             hands-on coding exercises, projects and quizzes.
           </p>
-          <h5>Founders:</h5>
-          <div className="img-founders">
-            <Image src={pic10} />
-            <p>Mrs. Realyn Damasco</p>
-            <Image src={pic11} />
-            <p>Mr. Mar Jayson Manzano</p>
+          <h5 className="fw-bold mb-4 mt-4">Founders:</h5>
+          <div className="img-founders mb-5 mx-5">
+            <Image className="img-founder" src={pic10} />
+            <p className=" text-founder fw-bold mx-2">Mrs. Realyn Damasco</p>
+            <Image className="img-founder" src={pic11} />
+            <p className="text-founder fw-bold mx-2">Mr. Mar Jayson Manzano</p>
           </div>
         </div>
       </div>

@@ -1,0 +1,13 @@
+.img-founder {
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+}
+.img-founders {
+  display: flex;
+}
+.text-founder {
+  align-items: flex-end;
+  display: flex;
+  text-decoration: underline;
+}
