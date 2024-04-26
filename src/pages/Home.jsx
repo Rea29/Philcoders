@@ -1,8 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Course from "../course/Course";
-import Carousel from "react-bootstrap/Carousel";
 import Container from "react-bootstrap/Container";
+import Carousel from "react-bootstrap/Carousel";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faQuoteLeft } from "@fortawesome/free-solid-svg-icons";
 import Button from "react-bootstrap/Button";
@@ -16,6 +15,14 @@ import pic6 from "../images/pic6.jpg";
 import pic7 from "../images/pic7.jpg";
 import pic8 from "../images/pic8.jpg";
 import pic9 from "../images/pic9.jpg";
+import volkswagen from "../images/volkswagen.svg";
+import samsung from "../images/samsung.svg";
+import cisco from "../images/cisco.svg";
+import att from "../images/att.svg";
+import procter_gamble from "../images/procter_gamble.svg";
+import hewlett_packard_enterprise from "../images/hewlett_packard_enterprise.svg";
+import citi from "../images/citi.svg";
+import ericsson from "../images/ericsson.svg";
 import Development from "../images/Development.png";
 import Business from "../images/Business.png";
 import Design from "../images/Design.png";
@@ -34,7 +41,7 @@ const Home = () => {
   return (
     <>
       <Carousel>
-        <Carousel.Item className="position-relative">
+        <Carousel.Item className="position-relative mb-5">
           <div className="carousel-overlay"></div>
           <Image className="carousel-img" src={pic1} />
           <Carousel.Caption className="mb-5">
@@ -47,48 +54,55 @@ const Home = () => {
             </Link>
           </Carousel.Caption>
         </Carousel.Item>
-      </Carousel>
-
-      {/* <Carousel>
-        <Carousel.Item className="position-relative">
-          <div className="carousel-overlay"></div>
-          <Image className="carousel-img" src={pic1} />
-          <Carousel.Caption>
-            <h3>
-              You've started a journey where every step forward is a triumph.
-            </h3>
-          </Carousel.Caption>
-        </Carousel.Item> */}
-      {/* <Carousel.Item className="position-relative">
-          <div className="carousel-overlay"></div>
-          <Image className="carousel-img" src={pic2} />
-          <Carousel.Caption>
-            <h3>
-              Challenges may arise, but remember, they are the raw material for
-              growth and resilience.
-            </h3>
-          </Carousel.Caption>
-        </Carousel.Item>
-        <Carousel.Item className="position-relative">
+        <Carousel.Item className="position-relative mb-5">
           <div className="carousel-overlay"></div>
           <Image className="carousel-img" src={pic3} />
-          <Carousel.Caption>
-            <h3>
-              Challenges may arise, but remember, they are the raw material for
-              growth and resilience.
-            </h3>
+          <Carousel.Caption className="mb-5">
+            <p className="display-5 ">
+              Are you ready to take your coding journey to the next level?
+            </p>
+            <Link to="/course">
+              <Button className="mb-5 btn btn-primary mt-2">
+                GET STARTED NOW!
+              </Button>
+            </Link>
           </Carousel.Caption>
-        </Carousel.Item> */}
-      {/* </Carousel> */}
-      {/* <section className="d-flex flex-column text-center mt-5" id="home">
-        <h1 className="display-4 fw-bold">WELCOME TO ℘hilCoders </h1>
-        <p className="fs-4 fw-bold">Code Your Dreams Into Reality!</p>
-        <Link to="/course">
-          <Button className="btn btn-primary mt-2">GET STARTED NOW!</Button>
-        </Link>
-      </section> */}
-      <Container className="mb-5">
-        <h1 className="fw-bold mb-5">
+        </Carousel.Item>
+      </Carousel>
+      <Container className="mt-5">
+        <h3 className="text-center mb-5">
+          Trusted by over 15,000 companies and millions of learners around the
+          world
+        </h3>
+        <Row className="mx-5 text-center">
+          <Col className="mb-5">
+            <Image src={volkswagen} />
+          </Col>
+          <Col>
+            <Image src={samsung} />
+          </Col>
+          <Col>
+            <Image src={cisco} />
+          </Col>
+          <Col>
+            <Image src={att} />
+          </Col>
+          <Col>
+            <Image src={procter_gamble} />
+          </Col>
+          <Col>
+            <Image src={hewlett_packard_enterprise} />
+          </Col>
+          <Col>
+            <Image src={citi} />
+          </Col>
+          <Col>
+            <Image src={ericsson} />
+          </Col>
+        </Row>
+      </Container>
+      <Container className="mt-5 mb-5">
+        <h1 className="fw-bold mb-4">
           How learners like you are achieving their goals
         </h1>
         <Row xs={1} md={2} lg={3} className="g-4">
@@ -199,7 +213,7 @@ const Home = () => {
           </Col>
         </Row>
       </Container>
-      <Container className=" mb-5">
+      <Container className=" mb-5 mt-5">
         <h2 className="fw-bold mb-4">Top categories</h2>
         <Row xs={1} md={2} lg={4} className="g-4">
           <Col>
@@ -251,6 +265,126 @@ const Home = () => {
             <h5 className="fw-bold">Photography</h5>
           </Col>
         </Row>
+      </Container>
+      <Container className=" mb-5 mt-5">
+        <h2 className="fw-bold mb-4">Featured topics by category</h2>
+        <Row xs={1} md={2} lg={4} className="g-4 mb-4">
+          <Col>
+            <h3 className="fw-bold">Development</h3>
+          </Col>
+          <Col>
+            <h3 className="fw-bold">Business</h3>
+          </Col>
+          <Col>
+            <h3 className="fw-bold">IT and Software</h3>
+          </Col>
+          <Col>
+            <h3 className="fw-bold">Design</h3>
+          </Col>
+        </Row>
+        <Row xs={1} md={2} lg={4} className="mb-4">
+          <Col>
+            <Link>
+              <h5 className="fw-bold">Python</h5>
+            </Link>
+            <p>36,354,994 learners</p>
+          </Col>
+          <Col>
+            <Link>
+              <h5 className="fw-bold">Financial Analysis</h5>
+            </Link>
+            <p>1,195,282 learners</p>
+          </Col>
+          <Col>
+            <Link>
+              <h5 className="fw-bold">Amazon AWS</h5>
+            </Link>
+            <p>6,123,456 learners</p>
+          </Col>
+          <Col>
+            <Link>
+              <h5 className="fw-bold">Photoshop</h5>
+            </Link>
+            <p>10,909,736 learners</p>
+          </Col>
+        </Row>
+        <Row xs={1} md={2} lg={4} className="mb-4">
+          <Col>
+            <Link>
+              <h5 className="fw-bold">Web Development</h5>
+            </Link>
+            <p>11,415,615 learners</p>
+          </Col>
+          <Col>
+            <Link>
+              <h5 className="fw-bold">SQL</h5>
+            </Link>
+            <p>5,977,561 learners</p>
+          </Col>
+          <Col>
+            <Link>
+              <h5 className="fw-bold">Ethical Hacking</h5>
+            </Link>
+            <p>10,931,066 learners</p>
+          </Col>
+          <Col>
+            <Link>
+              <h5 className="fw-bold">Graphic Design</h5>
+            </Link>
+            <p>3,381,052 learners</p>
+          </Col>
+        </Row>
+        <Row xs={1} md={2} lg={4} className="mb-4">
+          <Col>
+            <Link>
+              <h5 className="fw-bold">Machine Learning</h5>
+            </Link>
+            <p>7,070,015 learners</p>
+          </Col>
+          <Col>
+            <Link>
+              <h5 className="fw-bold">PMP</h5>
+            </Link>
+            <p>1,733,398 learners</p>
+          </Col>
+          <Col>
+            <Link>
+              <h5 className="fw-bold">Cyber Security</h5>
+            </Link>
+            <p>3,998,037 learners</p>
+          </Col>
+          <Col>
+            <Link>
+              <h5 className="fw-bold">Drawing</h5>
+            </Link>
+            <p>2,410,849 learners</p>
+          </Col>
+        </Row>
+        <Link>
+          <Button variant="primary">Explore more topics</Button>
+        </Link>
+      </Container>
+      <Container className=" business-cont mb-5 mt-5">
+        <Image className="img-business" src={pic2} fluid />
+        <div className="text-business mx-5">
+          <h2 className="fw-bold">℘hilCoders business</h2>
+          <h1 className="fw-bold">
+            Upskill your team with ℘hilCoders Business
+          </h1>
+          <ul>
+            <li>
+              Unlimited access to 25,000+ top Udemy courses, anytime, anywhere
+            </li>
+            <li>International course collection in 14 languages</li>
+            <li>Top certifications in tech and business</li>
+          </ul>
+        </div>
+        <Link className="mx-5">
+          <Button variant="primary" className="mx-2">
+            ℘hilCoders business
+          </Button>
+          <Button variant="primary">Learn more</Button>
+        </Link>
       </Container>
     </>
   );
