@@ -3,13 +3,14 @@
 import ListCourse from "../course/ListCourse";
 
 function samplenav() {
-  return (
-    <>
-      {/* <CreateCourse />
-      <EditCourse /> */}
-      <ListCourse />
-    </>
-  );
+  function RenderNavbar() {
+    if (localStorage.getItem("user_type") == "instructor") {
+      return <ListCourse />;
+    }
+    window.location = "/";
+    // return <NavBarHome />;
+  }
+  return <>{RenderNavbar()}</>;
 }
 
 export default samplenav;

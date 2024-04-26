@@ -64,7 +64,7 @@ function studentnavbar(props) {
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mx-5">
             <Nav.Link href="/">Home</Nav.Link>
-            <Nav.Link href="/course-management">Manage Course</Nav.Link>
+            <Nav.Link href="/course">Courses</Nav.Link>
             <Nav.Link href="/about">About Us</Nav.Link>
             <Nav.Link href="/contact">Contact Us</Nav.Link>
           </Nav>

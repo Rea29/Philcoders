@@ -40,7 +40,7 @@ const Home = () => {
           <Carousel.Caption className="mb-5">
             <h1 className="display-4 fw-bold">WELCOME TO ℘hilCoders </h1>
             <p className="fs-4 fw-bold">Code Your Dreams Into Reality!</p>
-            <Link to="/course">
+            <Link to="/Course">
               <Button className="mb-5 btn btn-primary mt-2">
                 GET STARTED NOW!
               </Button>
