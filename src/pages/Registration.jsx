@@ -9,28 +9,19 @@ import axios from "axios";
 const Registration = (props) => {
   const [RegistrationData, setRegistrationData] = useState({
     name: props.RegistrationData ? props.RegistrationData.name : "",
-    lastname: props.RegistrationData ? props.RegistrationData.lastname : "",
-    birthday: props.RegistrationData ? props.RegistrationData.birthday : "",
-    contactnumber: props.RegistrationData
-      ? props.RegistrationData.contactnumber
-      : "",
     email: props.RegistrationData ? props.RegistrationData.email : "",
     password: props.RegistrationData ? props.RegistrationData.password : "",
+    confirm_password: props.RegistrationData
+      ? props.RegistrationData.confirm_password
+      : "",
     user_type: props.RegistrationData ? props.RegistrationData.user_type : "",
   });
   const [errorMessage, setErrorMessage] = useState("");
   const [show, setShow] = useState(false);
   const [showError, setShowError] = useState(false);
   const [RegistrationResponseData, setRegistrationResponseData] = useState([]);
-  const {
-    name,
-    lastname,
-    birthday,
-    contactnumber,
-    email,
-    password,
-    user_type,
-  } = RegistrationData;
+  const { name, email, password, confirm_password, user_type } =
+    RegistrationData;
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -44,41 +35,26 @@ const Registration = (props) => {
   };
   const RegistrationFunc = async (event) => {
     event.preventDefault();
-    const values = [
-      name,
-      lastname,
-      birthday,
-      contactnumber,
-      email,
-      password,
-      user_type,
-    ];
+    const values = [name, email, password, confirm_password, user_type];
+
+    if (confirm_password != password) {
+      alert("Confirm password does not match");
+      return null;
+    }
     let errorMsg = "";
     console.log();
-    let headers = {
-      // Authorization: `Bearer ${localStorage.getItem("token")}`,
-      "Content-Type": "application/json",
-      Accept: "application/json",
-    };
+
     setShowError(false);
     setShow(false);
 
     axios
-      .post(
-        "http://localhost:8000/api/register",
-        {
-          name: RegistrationData.name,
-          lastname: RegistrationData.lastname,
-          birthday: RegistrationData.birthday,
-          contactnumber: RegistrationData.contactnumber,
-          email: RegistrationData.email,
-          password: RegistrationData.password,
-          user_type: RegistrationData.user_type,
-        },
-        {
-          headers: headers,
-        }
-      )
+      .post("http://localhost:8000/api/register", {
+        name: RegistrationData.name,
+        email: RegistrationData.email,
+        password: RegistrationData.password,
+        password_confirmation: RegistrationData.confirm_password,
+        user_type: RegistrationData.user_type,
+      })
       .then(function (response) {
         if (response.data.isError) {
           console.log(response.data);
@@ -87,11 +63,10 @@ const Registration = (props) => {
         } else {
           console.log(response.data);
           setRegistrationResponseData(response.data);
-          localStorage.setItem("token", response.data.token);
-          console.log("token ", localStorage.getItem("token"));
           setShow(true);
+          window.location = "/login";
         }
-        // alert(response.data.message);
+        alert(response.data.message);
       })
       .catch(function (error) {
         console.error("Error:", error);
@@ -108,30 +83,6 @@ const Registration = (props) => {
     <div className="container my-2 mb-5 mt-4">
       <div className="row">
         <div className="col-md-8  mx-auto px-3 py-5 bg-light rounded">
-          <Alert show={show} variant="success">
-            <Alert.Heading>Success</Alert.Heading>
-            <p>{RegistrationResponseData.message}</p>
-            <hr />
-            <div className="d-flex justify-content-end">
-              <Button onClick={() => setShow(false)} variant="outline-success">
-                Close
-              </Button>
-            </div>
-          </Alert>
-
-          <Alert show={showError} variant="danger">
-            <Alert.Heading>Error</Alert.Heading>
-            <p>{errorMessage}</p>
-            <hr />
-            <div className="d-flex justify-content-end">
-              <Button
-                onClick={() => setShowError(false)}
-                variant="outline-success"
-              >
-                Close
-              </Button>
-            </div>
-          </Alert>
           <div className="container my-2">
             <div className="row">
               <div
@@ -140,15 +91,17 @@ const Registration = (props) => {
               >
                 <h1 className="text-center mb-3">PHILCODERS</h1>
                 <p className="text-center">Online Registration Information!</p>
-                <form>
+                <form onSubmit={RegistrationFunc}>
                   <div className="mb-3">
                     <label htmlFor="name" className="form-label fw-bold">
-                      First Name:
+                      Full Name:
                     </label>
                     <input
                       type="name"
                       id="name"
                       name="name"
+                      value={name}
+                      onChange={handleInputChange}
                       className="form-control shadow-none"
                       autoComplete="off"
                       required
@@ -156,61 +109,15 @@ const Registration = (props) => {
                     />
                   </div>
                   <div className="mb-3">
-                    <label htmlFor="lastname" className="form-label fw-bold">
-                      Last Name:
+                    <label htmlFor="email" className="form-label fw-bold">
+                      Email:
                     </label>
                     <input
-                      type="lastname"
-                      id="lastname"
-                      name="lastname"
-                      className="form-control shadow-none"
-                      autoComplete="off"
-                      required
-                      placeholder=""
-                    />
-                  </div>
-                  <div className="mb-3">
-                    <label htmlFor="birthday" className="form-label fw-bold">
-                      Birthday:
-                    </label>
-                    <input
-                      type="birthday"
-                      id="birthday"
-                      name="birthday"
-                      className="form-control shadow-none"
-                      autoComplete="off"
-                      required
-                      placeholder=""
-                    />
-                  </div>
-                  <div className="mb-3">
-                    <label
-                      htmlFor="contactnumber"
-                      className="form-label fw-bold"
-                    >
-                      Contact Number:
-                    </label>
-                    <input
-                      type="contactnumber"
-                      id="contactnumber"
-                      name="contactnumber"
-                      className="form-control shadow-none"
-                      autoComplete="off"
-                      required
-                      placeholder=""
-                    />
-                  </div>
-                  <div className="mb-3">
-                    <label
-                      htmlFor="emailaddress"
-                      className="form-label fw-bold"
-                    >
-                      Email address:
-                    </label>
-                    <input
-                      type="emailaddress"
-                      id="emailaddress"
-                      name="emailaddress"
+                      type="email"
+                      id="email"
+                      name="email"
+                      value={email}
+                      onChange={handleInputChange}
                       className="form-control shadow-none"
                       autoComplete="off"
                       required
@@ -225,10 +132,29 @@ const Registration = (props) => {
                       type="password"
                       id="password"
                       name="password"
+                      value={password}
+                      onChange={handleInputChange}
                       className="form-control shadow-none"
                       autoComplete="off"
                       required
-                    ></input>
+                      placeholder=""
+                    />
+                  </div>
+                  <div className="mb-3">
+                    <label htmlFor="password" className="form-label fw-bold">
+                      Confirm Password:
+                    </label>
+                    <input
+                      type="password"
+                      id="password"
+                      name="confirm_password"
+                      value={confirm_password}
+                      onChange={handleInputChange}
+                      className="form-control shadow-none"
+                      autoComplete="off"
+                      required
+                      placeholder=""
+                    />
                   </div>
                   <Form.Select
                     aria-label="Default select example"
@@ -239,7 +165,6 @@ const Registration = (props) => {
                     <option>Select User Type</option>
                     <option value="student">Student</option>
                     <option value="instructor">Instructor</option>
-                    onChange={handleInputChange}
                   </Form.Select>
                   <br />
                   {/* <div className="mb-3">
