@@ -8,64 +8,66 @@ const CourseForm = (props) => {
   const navigate = useNavigate();
 
   const [course, setcourse] = useState({
-    CourseID: props.course ? props.course.CourseID : "",
-    InstructorID: props.course ? props.course.InstructorID : "",
-    CategoryID: props.course ? props.course.CategoryID : "",
-    Name: props.course ? props.course.Name : "",
-    Description: props.course ? props.course.Description : "",
-    DurationHours: props.course ? props.course.DurationHours : "",
-    DurationMinutes: props.course ? props.course.DurationMinutes : "",
-    Pic_Url: props.course ? props.course.Pic_Url : "",
-    Price: props.course ? props.course.Price : "",
-    Ratings: props.course ? props.course.Ratings : "",
+    categoryId: props.course ? props.course.categoryId : "",
+    title: props.course ? props.course.title : "",
+    description: props.course ? props.course.description : "",
+    durationHours: props.course ? props.course.durationHours : "",
+    durationMinutes: props.course ? props.course.durationMinutes : "",
+    picUrl: props.course ? props.course.picUrl : "",
+    price: props.course ? props.course.price : "",
   });
-  const [editCourseID, setEditCourseID] = useState([]);
+  const [editCourseId, setEditCourseId] = useState([]);
   const [selectedCourse, setSelectedCourse] = useState([]);
   const [instructorData, setInstructorData] = useState([]);
   const [categoryData, setCategoryData] = useState([]);
   const [errorMsg, setErrorMsg] = useState("");
 
   const {
-    CourseID,
-    InstructorID,
-    CategoryID,
-    Name,
-    Description,
-    DurationHours,
-    DurationMinutes,
-    Pic_Url,
-    Price,
+    instructorId,
+    categoryId,
+    title,
+    description,
+    durationHours,
+    durationMinutes,
+    picUrl,
+    price,
   } = course;
   useEffect(() => {
     console.log("courseId", "this the selected course id " + courseId);
+    let headers = {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    };
     axios
-      .post("http://localhost/api/getCourseById.php", {
-        CourseID: courseId,
-      })
+      .get("http://localhost:8000/api/course/" + courseId, { headers })
       .then(function (response) {
-        console.log("getCourseById", response.data);
+        console.log("getcoursebyid", response.data);
         setcourse({
-          CourseID: response.data.CourseID,
-          InstructorID: response.data.InstructorID,
-          CategoryID: response.data.CategoryID,
-          Name: response.data.Name,
-          Description: response.data.Description,
-          DurationHours: response.data.DurationHours,
-          DurationMinutes: response.data.DurationMinutes,
-          Pic_Url: response.data.Pic_Url,
-          Price: response.data.Price,
+          categoryId: response.data.categoryId,
+          title: response.data.title,
+          description: response.data.description,
+          durationHours: response.data.durationHours,
+          durationMinutes: response.data.durationMinutes,
+          picUrl: response.data.picUrl,
+          price: response.data.price,
         });
         setSelectedCourse(response.data);
       })
       .catch(function (error) {
-        console.error("Error:", error);
+        console.error("getcoursebyid Error:", error);
       });
 
     // getCourses(null);
   }, []);
   useEffect(() => {
+    let headers = {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    };
     axios
-      .get("http://localhost/api/getCategories.php")
+      .get("http://localhost:8000/api/categories", { headers })
       .then((res) => {
         console.log(res);
 
@@ -77,52 +79,41 @@ const CourseForm = (props) => {
 
     // getCourses(null);
   }, []);
-
-  useEffect(() => {
-    axios
-      .get("http://localhost/api/getInstructor.php")
-      .then((res) => {
-        console.log(res);
-
-        setInstructorData(res.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-
-    // getCourses(null);
-  }, []);
-
   const handleOnSubmit = async (event) => {
     event.preventDefault();
     const values = [
-      CourseID,
-      InstructorID,
-      CategoryID,
-      Name,
-      Description,
-      DurationHours,
-      DurationMinutes,
-      Pic_Url,
-      Price,
+      instructorId,
+      categoryId,
+      title,
+      description,
+      durationHours,
+      durationMinutes,
+      picUrl,
+      price,
     ];
     let errorMsg = "";
     console.log(course);
-
+    let headers = {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    };
     axios
-      .post("http://localhost/api/EditCourse.php", {
-        CourseID: course.CourseID,
-        InstructorID: course.InstructorID,
-        CategoryID: course.CategoryID,
-        Name: course.Name,
-        Description: course.Description,
-        DurationHours: course.DurationHours,
-        DurationMinutes: course.DurationMinutes,
-        Pic_Url: course.Pic_Url,
-        Price: course.Price,
-      })
+      .put(
+        "http://localhost:8000/api/update/course/" + courseId,
+        {
+          categoryId: course.categoryId,
+          title: course.title,
+          description: course.description,
+          durationHours: course.durationHours,
+          durationMinutes: course.durationMinutes,
+          picUrl: course.picUrl,
+          price: course.price,
+        },
+        { headers }
+      )
       .then(function (response) {
-        console.log(response.data);
+        console.log("update/course/", response.data);
         if (response.data.hasError == false) {
           alert(response.data.message);
           navigate("/course-management");
@@ -131,7 +122,7 @@ const CourseForm = (props) => {
         }
       })
       .catch(function (error) {
-        console.error("Error:", error);
+        console.error("update/course/ Error:", error);
       });
     const allFieldsFilled = values.every((field) => {
       const value = `${field}`.trim();
@@ -140,15 +131,13 @@ const CourseForm = (props) => {
 
     if (allFieldsFilled) {
       const course = {
-        CourseID,
-        InstructorID,
-        CategoryID,
-        Name,
-        Description,
-        DurationHours,
-        DurationMinutes,
-        Pic_Url,
-        Price,
+        categoryId,
+        title,
+        description,
+        durationHours,
+        durationMinutes,
+        picUrl,
+        price,
       };
       props.handleOnSubmit(course);
     } else {
@@ -177,31 +166,31 @@ const CourseForm = (props) => {
     }
   };
   function getSelectedOptionInstructor(data) {
-    if (data.InstructorID == selectedCourse.InstructorID) {
+    if (data.instructorId == selectedCourse.instructorId) {
       return (
-        <option value={data.InstructorID} key={data.InstructorID} defaultValue>
+        <option value={data.instructorId} key={data.InstructorID} defaultValue>
           {data.Name}
         </option>
       );
     }
     return (
-      <option value={data.InstructorID} key={data.InstructorID}>
+      <option value={data.instructorId} key={data.instructorId}>
         {data.Name}
       </option>
     );
   }
   function getSelectedOptionCategory(data) {
     console.log("getSelectedOptionCategory", data);
-    if (data.CategoriesID == selectedCourse.CategoryID) {
+    if (data.id == selectedCourse.categoryId) {
       return (
-        <option value={data.CategoriesID} key={data.CategoriesID} defaultValue>
-          {data.CategoryName}
+        <option value={data.id} key={data.id} defaultValue>
+          {data.category_name}
         </option>
       );
     }
     return (
-      <option value={data.CategoriesID} key={data.CategoriesID}>
-        {data.CategoryName}
+      <option value={data.id} key={data.id}>
+        {data.category_name}
       </option>
     );
   }
@@ -213,112 +202,92 @@ const CourseForm = (props) => {
 
           {errorMsg && <p className="errorMsg">{errorMsg}</p>}
           <Form onSubmit={handleOnSubmit}>
-            <Form.Group controlId="Name">
-              <Form.Label>Name</Form.Label>
+            <Form.Group controlId="title">
+              <Form.Label>Title</Form.Label>
               <Form.Control
                 className="input-control"
                 type="text"
-                name="Name"
-                value={Name}
-                placeholder="Please enter Name"
+                name="title"
+                value={title}
+                placeholder="Please enter title"
                 onChange={handleInputChange}
               />
               <br />
             </Form.Group>
-            <Form.Group controlId="InstructorID">
-              <Form.Label>Instructor</Form.Label>
-              <Form.Select
-                aria-label="Default select example"
-                name="InstructorID"
-                value={InstructorID}
-                onChange={handleInputChange}
-              >
-                {/* <option value="1">One</option> */}
-                {instructorData.map((val) => getSelectedOptionInstructor(val))}
-              </Form.Select>
-              <br />
-            </Form.Group>
-            {/* categoryData */}
-            <Form.Group controlId="CategoryID">
+
+            <Form.Group controlId="categoryId">
               <Form.Label>Category</Form.Label>
               <Form.Select
                 aria-label="Default select example"
-                name="CategoryID"
-                value={CategoryID}
+                name="categoryId"
+                value={categoryId}
                 onChange={handleInputChange}
               >
-                {/* <option>Select Category</option> */}
-                {/* <option value="1">One</option> */}
-                {/* {categoryData.map((val) => (
-                  <option value={val.CategoriesID} key={val.CategoriesID}>
-                    {val.CategoryName}
-                  </option>
-                ))} */}
                 {categoryData.map((val) => getSelectedOptionCategory(val))}
               </Form.Select>
               <br />
             </Form.Group>
 
-            <Form.Group controlId="Description">
+            <Form.Group controlId="description">
               <Form.Label>Description</Form.Label>
               <Form.Control
                 className="input-control"
                 type="text"
-                name="Description"
-                value={Description}
-                placeholder="Please enter Description"
+                name="description"
+                value={description}
+                placeholder="Please enter description"
                 onChange={handleInputChange}
               />
 
               <br />
             </Form.Group>
-            <Form.Group controlId="DurationHours">
+            <Form.Group controlId="durationHours">
               <Form.Label>DurationHours</Form.Label>
               <Form.Control
                 className="input-control"
                 type="text"
-                name="DurationHours"
-                value={DurationHours}
+                name="durationHours"
+                value={durationHours}
                 placeholder="Please enter DurationHours"
                 onChange={handleInputChange}
               />
 
               <br />
             </Form.Group>
-            <Form.Group controlId="DurationMinutes">
+            <Form.Group controlId="durationMinutes">
               <Form.Label>DurationMinutes</Form.Label>
               <Form.Control
                 className="input-control"
                 type="text"
-                name="DurationMinutes"
-                value={DurationMinutes}
+                name="durationMinutes"
+                value={durationMinutes}
                 placeholder="Please enter DurationMinutes"
                 onChange={handleInputChange}
               />
 
               <br />
             </Form.Group>
-            <Form.Group controlId="Pic_Url">
+            <Form.Group controlId="picUrl">
               <Form.Label>Picture Url</Form.Label>
               <Form.Control
                 className="input-control"
                 type="text"
-                name="Pic_Url"
-                value={Pic_Url}
+                name="picUrl"
+                value={picUrl}
                 placeholder="Please enter url pic."
                 onChange={handleInputChange}
               />
 
               <br />
             </Form.Group>
-            <Form.Group controlId="Price">
+            <Form.Group controlId="price">
               <Form.Label>Price</Form.Label>
               <Form.Control
                 className="input-control"
                 type="text"
-                name="Price"
-                value={Price}
-                placeholder="Please enter url Price."
+                name="price"
+                value={price}
+                placeholder="Please enter Price."
                 onChange={handleInputChange}
               />
 

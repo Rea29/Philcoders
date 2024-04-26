@@ -36,6 +36,7 @@ function samplenav() {
       Accept: "application/json",
     };
     console.log(localStorage.getItem("token"));
+
     if (localStorage.getItem("token")) {
       axios
         .get("http://localhost:8000/api/user-info", {
@@ -45,6 +46,7 @@ function samplenav() {
           console.log("getLoggedUserData", response.data);
           setUserFullName(response.data.user.name);
           setUserData(response.data);
+          localStorage.setItem("user_type", response.data.user.user_type);
         });
     }
   };

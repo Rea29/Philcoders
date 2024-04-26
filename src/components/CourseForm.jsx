@@ -27,7 +27,7 @@ const CourseForm = (props) => {
   } = course;
   useEffect(() => {
     axios
-      .get("http://localhost/api/getCategories.php")
+      .get("http://localhost:8000/api/categories")
       .then((res) => {
         console.log(res);
 

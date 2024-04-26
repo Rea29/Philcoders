@@ -11,23 +11,35 @@ export default function ListUser() {
   }, []);
 
   function getCourses() {
-    axios.get("http://localhost:8000/api/courses").then(function (response) {
-      console.log(response.data);
-      setCourses(response.data);
-    });
+    let headers = {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    };
+    axios
+      .get("http://localhost:8000/api/courses", { headers })
+      .then(function (response) {
+        console.log("getCourses", response.data);
+        setCourses(response.data);
+      });
   }
 
-  const deleteUser = (id) => {
+  const deleteCourse = (id) => {
+    let headers = {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    };
     axios
-      .post("http://localhost:8000/api/course/{id}", {
-        CourseID: id,
+      .delete("http://localhost:8000/api/delete/course/" + id, {
+        headers,
       })
       .then(function (response) {
         console.log(response.data);
         if (response.data.hasError == false) {
           console.log("DeleteCourse", response.data);
           alert(response.data.message);
-          getCourses();
+          window.location.reload();
         } else {
           alert(response.data.message);
         }
@@ -48,37 +60,35 @@ export default function ListUser() {
         <table className="table table-bordered table-striped">
           <thead>
             <tr>
-              <th>Name</th>
+              <th>Title</th>
               <th>Description</th>
               <th>Instructor</th>
               <th>Category</th>
               <th>Duration</th>
-              <th>Ratings</th>
               <th></th>
             </tr>
           </thead>
           <tbody>
             {Courses.map((course, key) => (
               <tr key={key}>
-                <td>{course.Name}</td>
-                <td>{course.Description}</td>
-                <td>{course.InstructorName}</td>
-                <td>{course.CategoryName}</td>
+                <td>{course.title}</td>
+                <td>{course.description}</td>
+                <td>{course.instructor_name}</td>
+                <td>{course.category_name}</td>
                 <td>
-                  {course.DurationHours} Hour/s and {course.DurationMinutes}{" "}
+                  {course.durationHours} Hour/s and {course.durationMinutes}{" "}
                   Minute/s{" "}
                 </td>
-                <td>{course.Ratings}</td>
                 <td>
                   <Link
-                    to={`/edit-course/${course.CourseID}`}
+                    to={`/edit-course/${course.id}`}
                     className="btn btn-success"
                     style={{ marginRight: "10px" }}
                   >
                     Edit
                   </Link>
                   <button
-                    onClick={() => deleteUser(course.CourseID)}
+                    onClick={() => deleteCourse(course.id)}
                     className="btn btn-danger"
                   >
                     Delete

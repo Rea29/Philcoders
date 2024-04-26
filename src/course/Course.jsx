@@ -18,9 +18,14 @@ const Shop = () => {
   const [hover, setHover] = useState(0);
   function getCourses(category) {
     if (category == null || category == "All") {
+      let headers = {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      };
       axios
         // .get("https://realyn.onrender.com/course")
-        .get("http://localhost/api/getAllCourses.php")
+        .get("http://localhost:8000/api/courses", { headers })
         .then((res) => {
           console.log(res);
 
@@ -32,7 +37,7 @@ const Shop = () => {
         });
     } else {
       axios
-        .get("http://localhost/api/getAllCourses.php")
+        .get("http://localhost:8000/api/courses")
         // .get("https://realyn.onrender.com/course?category=" + category)
         .then((res) => {
           console.log(res);
@@ -46,8 +51,13 @@ const Shop = () => {
     }
   }
   useEffect(() => {
+    let headers = {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    };
     axios
-      .get("https://realyn.onrender.com/category")
+      .get("http://localhost:8000/api/categories", { headers })
       .then((res) => {
         console.log(res);
 
@@ -80,33 +90,26 @@ const Shop = () => {
   }
   return (
     <div>
-      <h1 className=" display-5 fw-bold text-center mt-5" id="CourseList">
-        Courses offers!
-      </h1>
+      <Link to="/Course">
+        <h1 className=" display-5 fw-bold text-center mt-5" id="CourseList">
+          Courses offers!
+        </h1>
+      </Link>
       <div
         className="row justify-content-center gap-4 mx-auto my-5"
-        id="product"
+        id="courselist"
       >
         {/*   */}
 
         {data.map((val) => (
-          <div key={val.CourseID} className="card" style={{ width: "18rem" }}>
-            <img src={val.Pic_Url} className="card-img-top mt-2 " alt="" />
+          <div key={val.Courseid} className="card" style={{ width: "18rem" }}>
+            <img src={val.picUrl} className="card-img-top mt-2 " alt="" />
             <div className="card-body">
-              <h6 className="text-left">{val.Name}</h6>
-              <h5 className="text-left">{val.Description}</h5>
-              <h5 className="text-left">₱{val.Price}</h5>
-              <h5 className="text-left">Instructor: {val.InstructorName}</h5>
-              {[...Array(Math.floor(val.ratings))].map((star, index) => {
-                return (
-                  <FaStar
-                    className="star"
-                    color={"#ffc107"}
-                    size={20}
-                    key={index}
-                  />
-                );
-              })}
+              <h6 className="text-left">{val.title}</h6>
+              <h5 className="text-left">{val.description}</h5>
+              <h5 className="text-left">₱{val.price}</h5>
+              <h5 className="text-left">instructorId: {val.InstructorName}</h5>
+              <h5 className="text-left">categoryId: {val.CategorName}</h5>
 
               <center>
                 <Link
