@@ -74,7 +74,6 @@ function studentnavbar(props) {
             Signed in as:{" "}
             <a href="" className="text-capitalize">
               {props.name.user.name}
-              {props.name.user.user_type}
             </a>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <button onClick={handleClick}>Logout</button>
