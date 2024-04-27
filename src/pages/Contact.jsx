@@ -47,7 +47,7 @@ const Contact = () => {
               ></textarea>
             </div>
 
-            <button type="submit" className="btn btn-primary mt-2">
+            <button type="submit" className=" btn btn-primary mt-2">
               Submit
             </button>
           </form>

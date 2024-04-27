@@ -59,7 +59,9 @@ function studentnavbar(props) {
   return (
     <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary">
       <Container>
-        <Navbar.Brand href="/">℘hilCoders</Navbar.Brand>
+        <Navbar.Brand className="fw-bold" href="/">
+          ℘hilCoders
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mx-5">
@@ -76,7 +78,9 @@ function studentnavbar(props) {
               {props.name.user.name}
             </a>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <button onClick={handleClick}>Logout</button>
+            <button className="btn btn-primary" onClick={handleClick}>
+              Logout
+            </button>
           </Navbar.Text>
         </Navbar.Collapse>
       </Container>

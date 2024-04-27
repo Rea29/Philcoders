@@ -31,14 +31,14 @@ function samplenav() {
     //   }
     // })
     var test = {
-      "user" : {
-        "name" : "Test"
-      }
+      user: {
+        name: "Test",
+      },
     };
     return <NavbarInstructor name={test} />;
     // return <NavbarStudents name={test} />;
     return <NavBarHome />;
-  }
+  };
   const getLoggedUserData = () => {
     //function getLoggedUserData() {
     let headers = {

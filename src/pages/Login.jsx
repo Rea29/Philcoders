@@ -158,7 +158,7 @@ const Login = (props) => {
               ></input>
               <label className="m-2">Forget Password?</label>
             </div>
-            <Button className="mb-5 btn btn-primary mt-2" type="submit">
+            <Button className=" mb-5 btn btn-primary mt-2" type="submit">
               Login
             </Button>
           </Form>

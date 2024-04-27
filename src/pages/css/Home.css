@@ -45,3 +45,17 @@
 li {
   font-size: larger;
 }
+.img-prof {
+  height: 500px;
+  width: 500px;
+  object-fit: cover;
+  float: left;
+}
+.prof-cont {
+  height: 500px;
+}
+.text-prof {
+  padding-top: 100px;
+}
+.prof-btn {
+}

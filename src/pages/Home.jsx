@@ -15,6 +15,7 @@ import pic6 from "../images/pic6.jpg";
 import pic7 from "../images/pic7.jpg";
 import pic8 from "../images/pic8.jpg";
 import pic9 from "../images/pic9.jpg";
+import pic12 from "../images/pic12.jpg";
 import volkswagen from "../images/volkswagen.svg";
 import samsung from "../images/samsung.svg";
 import cisco from "../images/cisco.svg";
@@ -41,14 +42,14 @@ const Home = () => {
   return (
     <>
       <Carousel>
-        <Carousel.Item className="position-relative mb-5">
+        <Carousel.Item className="container-fluid position-relative mb-5">
           <div className="carousel-overlay"></div>
           <Image className="carousel-img" src={pic1} />
           <Carousel.Caption className="mb-5">
             <h1 className="display-4 fw-bold">WELCOME TO ℘hilCoders </h1>
             <p className="fs-4 fw-bold">Code Your Dreams Into Reality!</p>
             <Link to="/Course">
-              <Button className="mb-5 btn btn-primary mt-2">
+              <Button className="mb-5 btn btn-primary mt-2 fw-bold">
                 GET STARTED NOW!
               </Button>
             </Link>
@@ -62,14 +63,14 @@ const Home = () => {
               Are you ready to take your coding journey to the next level?
             </p>
             <Link to="/course">
-              <Button className="mb-5 btn btn-primary mt-2">
+              <Button className="mb-5 btn btn-primary mt-2 fw-bold">
                 GET STARTED NOW!
               </Button>
             </Link>
           </Carousel.Caption>
         </Carousel.Item>
       </Carousel>
-      <Container className="mt-5">
+      <Container className="container-fluid mt-5">
         <h3 className="text-center mb-5">
           Trusted by over 15,000 companies and millions of learners around the
           world
@@ -101,7 +102,7 @@ const Home = () => {
           </Col>
         </Row>
       </Container>
-      <Container className="mt-5 mb-5">
+      <Container className="container-fluid mt-5 mb-5">
         <h1 className="fw-bold mb-4">
           How learners like you are achieving their goals
         </h1>
@@ -213,7 +214,7 @@ const Home = () => {
           </Col>
         </Row>
       </Container>
-      <Container className=" mb-5 mt-5">
+      <Container className="container-fluid mb-5 mt-5">
         <h2 className="fw-bold mb-4">Top categories</h2>
         <Row xs={1} md={2} lg={4} className="g-4">
           <Col>
@@ -266,7 +267,7 @@ const Home = () => {
           </Col>
         </Row>
       </Container>
-      <Container className=" mb-5 mt-5">
+      <Container className="container-fluid mb-5 mt-5">
         <h2 className="fw-bold mb-4">Featured topics by category</h2>
         <Row xs={1} md={2} lg={4} className="g-4 mb-4">
           <Col>
@@ -361,14 +362,14 @@ const Home = () => {
           </Col>
         </Row>
         <Link>
-          <Button variant="primary">Explore more topics</Button>
+          <Button variant="dark fw-bold">Explore more topics</Button>
         </Link>
       </Container>
-      <Container className=" business-cont mb-5 mt-5">
+      <Container className="container- business-cont mb-5 mt-5">
         <Image className="img-business" src={pic2} fluid />
-        <div className="text-business mx-5">
-          <h2 className="fw-bold">℘hilCoders business</h2>
-          <h1 className="fw-bold">
+        <div className=" text-business mx-5">
+          <h2 className="fw-bold ">℘hilCoders business</h2>
+          <h1 className="fw-bold ">
             Upskill your team with ℘hilCoders Business
           </h1>
           <ul>
@@ -380,11 +381,26 @@ const Home = () => {
           </ul>
         </div>
         <Link className="mx-5">
-          <Button variant="primary" className="mx-2">
+          <Button variant="dark" className="mx-2 fw-bold">
             ℘hilCoders business
           </Button>
-          <Button variant="primary">Learn more</Button>
+          <Button variant="dark fw-bold">Learn more</Button>
         </Link>
+      </Container>
+      <Container className="container-fluid prof-cont mb-5 mt-5">
+        <Image className="img-prof" src={pic12} fluid />
+        <div className="container-fluid text-prof  ">
+          <h1 className="fw-bold text-center ">Become an instructor</h1>
+          <h4 className="mx-5 text-center">
+            Instructors from around the world teach millions of learners on
+            Udemy. We provide the tools and skills to teach what you love.
+          </h4>
+          <Link className="mx-5 mt-3 ">
+            <Button className="prof-btn" variant="dark fw-bold">
+              Start teaching today
+            </Button>
+          </Link>
+        </div>
       </Container>
     </>
   );

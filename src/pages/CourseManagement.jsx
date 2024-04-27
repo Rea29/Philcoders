@@ -3,7 +3,7 @@
 import ListCourse from "../course/ListCourse";
 
 function samplenav() {
-  localStorage.setItem("user_type","instructor");
+  localStorage.setItem("user_type", "instructor");
   function RenderNavbar() {
     if (localStorage.getItem("user_type") == "instructor") {
       return <ListCourse />;

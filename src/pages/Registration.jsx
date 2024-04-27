@@ -157,7 +157,7 @@ const Registration = (props) => {
                     />
                   </div>
                   <label htmlFor="password" className="form-label fw-bold">
-                      Login as:
+                    Login as:
                   </label>
                   <Form.Select
                     aria-label="Default select example"
