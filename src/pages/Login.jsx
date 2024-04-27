@@ -8,6 +8,7 @@ import DropdownButton from "react-bootstrap/DropdownButton";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Alert from "react-bootstrap/Alert";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const Login = (props) => {
   const navigate = useNavigate();
@@ -32,8 +33,22 @@ const Login = (props) => {
         }));
     }
   };
+
   const loginFunc = async (event) => {
     event.preventDefault();
+
+    const isValidEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
+
+    if (loginData.email && loginData.email.match(isValidEmail)) {
+      // return null;
+    } else {
+      Swal.fire({
+        title: "Email",
+        text: "Please enter a valid email addres!",
+        icon: "error",
+      });
+      return null;
+    }
     const values = [email, password];
     let errorMsg = "";
     console.log(loginData);
@@ -42,9 +57,6 @@ const Login = (props) => {
       "Content-Type": "application/json",
       Accept: "application/json",
     };
-    setShowError(false);
-    setShow(false);
-
     axios
       .post(
         "http://localhost:8000/api/login",
@@ -60,21 +72,36 @@ const Login = (props) => {
         // localStorage.setItem("token");
         console.log(response.data);
         if (response.data.isError) {
-          setErrorMessage(String(response.data.message));
-          setShowError(true);
+          // setErrorMessage(String(response.data.message));
+          // setShowError(true);
+          Swal.fire({
+            title: response.data.message,
+            // text: "That thing is still around?",
+            icon: "error",
+          });
+          return null;
         } else {
           localStorage.setItem("token", response.data.token);
-          setLoginResponseData(response.data);
+          // setLoginResponseData(response.data);
 
           console.log("token ", localStorage.getItem("token"));
           window.location = "/";
+          Swal.fire({
+            title: response.data.message,
+            // text: "That thing is still around?",
+            icon: "success",
+          });
         }
         // alert(response.data.message);
       })
       .catch(function (error) {
-        console.error("Error:", error);
-        setErrorMessage(String(error.response.data.message));
-        setShowError(true);
+        Swal.fire({
+          title: "Server Error",
+          text: "Please wait while we fix this problem. Thank you!",
+          icon: "error",
+        });
+        // setErrorMessage(String(error.response.data.message));
+        // setShowError(true);
       });
     const allFieldsFilled = values.every((field) => {
       const value = `${field}`.trim();
@@ -86,36 +113,12 @@ const Login = (props) => {
     <div className="container my-2 mb-5 mt-4">
       <div className="row">
         <div className="col-md-8  mx-auto px-3 py-5 bg-light rounded">
-          <Alert show={show} variant="success">
-            <Alert.Heading>Success</Alert.Heading>
-            <p>{loginResponseData.message}</p>
-            <hr />
-            <div className="d-flex justify-content-end">
-              <Button onClick={() => setShow(false)} variant="outline-success">
-                Close
-              </Button>
-            </div>
-          </Alert>
-
-          <Alert show={showError} variant="danger">
-            <Alert.Heading>Error</Alert.Heading>
-            <p>{errorMessage}</p>
-            <hr />
-            <div className="d-flex justify-content-end">
-              <Button
-                onClick={() => setShowError(false)}
-                variant="outline-success"
-              >
-                Close
-              </Button>
-            </div>
-          </Alert>
           <h1 className="text-center mb-3">Login Form</h1>
           <Form onSubmit={loginFunc}>
             <Form.Group className="mb-3" controlId="formGroupEmail">
               <Form.Label>Email address</Form.Label>
               <Form.Control
-                type="email"
+                type="text"
                 placeholder="Enter email"
                 className="input-control"
                 name="email"
@@ -155,7 +158,9 @@ const Login = (props) => {
               ></input>
               <label className="m-2">Forget Password?</label>
             </div>
-            <Button className="mb-5 btn btn-primary mt-2">Login</Button>
+            <Button className="mb-5 btn btn-primary mt-2" type="submit">
+              Login
+            </Button>
           </Form>
         </div>
       </div>

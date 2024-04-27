@@ -1,6 +1,7 @@
 import axios from "axios"; //npm install axios --save
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import "./css/ListCourse.css";
 
 export default function ListUser() {
   const navigate = useNavigate();
@@ -49,8 +50,8 @@ export default function ListUser() {
       });
   };
   return (
-    <div className="row">
-      <div className="col-12">
+    <div className="row roomfac">
+      <div className="col-10">
         <Link to="/create-course" className="btn btn-success">
           Add Course
         </Link>

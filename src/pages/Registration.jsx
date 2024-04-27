@@ -80,7 +80,7 @@ const Registration = (props) => {
   };
 
   return (
-    <div className="container my-2 mb-5 mt-4">
+    <div className="container my-2">
       <div className="row">
         <div className="col-md-8  mx-auto px-3 py-5 bg-light rounded">
           <div className="container my-2">
@@ -156,13 +156,15 @@ const Registration = (props) => {
                       placeholder=""
                     />
                   </div>
+                  <label htmlFor="password" className="form-label fw-bold">
+                      Login as:
+                  </label>
                   <Form.Select
                     aria-label="Default select example"
                     name="user_type"
                     value={user_type}
                     onChange={handleInputChange}
                   >
-                    <option>Select User Type</option>
                     <option value="student">Student</option>
                     <option value="instructor">Instructor</option>
                   </Form.Select>

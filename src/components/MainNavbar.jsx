@@ -3,9 +3,9 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import Button from "react-bootstrap/esm/Button";
 import Form from "react-bootstrap/Form";
-import NavbarStudents from "./navbarstudents";
-import NavbarInstructor from "./navbarinstructor";
-import NavBarHome from "./navbarhome";
+import NavbarStudents from "./Navbar/NavbarStudents";
+import NavbarInstructor from "./Navbar/NavbarInstructor";
+import NavBarHome from "./Navbar/NavBarHome";
 import React, { useState, useEffect } from "react";
 import axios from "axios"; //npm install axios --save
 import { Link, useNavigate, NavLink } from "react-router-dom";
@@ -16,16 +16,27 @@ function samplenav() {
   useEffect(() => {
     getLoggedUserData();
   }, []);
-  function RenderNavbar(user) {
+  const RenderNavbar = (user) => {
     console.log("RenderNavbar", user);
     if (user.user) {
       if (user.user.user_type == "student") {
-        return <NavbarStudents name={userData} />;
+        // return <NavbarStudents name={userData} />;
       } else if (user.user.user_type === "instructor") {
-        return <NavbarInstructor name={userData} />;
+        // return <NavbarInstructor name={userData} />;
       }
     }
-
+    // setUserData({
+    //   "user" : {
+    //     "name" : "Test"
+    //   }
+    // })
+    var test = {
+      "user" : {
+        "name" : "Test"
+      }
+    };
+    return <NavbarInstructor name={test} />;
+    // return <NavbarStudents name={test} />;
     return <NavBarHome />;
   }
   const getLoggedUserData = () => {
