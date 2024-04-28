@@ -41,25 +41,25 @@ const helpers = {
   },
   StudentAccountCreated: function () {
     Swal.fire({
-      title: "Instructor Account Successfully Registered",
+      title: "Student Account Successfully Registered",
       text: "Believe in yourself, embrace the journey, and let your curiosity guide you. With dedication and perseverance, you'll turn dreams into reality and reach heights you never thought possible.", //"Please enter a valid email addres!",
       confirmButtonText: "Ok",
       icon: "success",
     }).then((result) => {
       if (result.isConfirmed) {
-        window.location = "/course-management";
+        window.location = "/Login";
       }
     });
   },
   InstructorAccountCreated: function () {
     Swal.fire({
-      title: "Student Account Successfully Registered",
+      title: "Instructor Account Successfully Registered",
       text: "Teachers plant the seeds of knowledge that grow forever in the hearts and minds of their students.", //"Please enter a valid email addres!",
       confirmButtonText: "Ok",
       icon: "success",
     }).then((result) => {
       if (result.isConfirmed) {
-        window.location = "/course-management";
+        window.location = "/Login";
       }
     });
   },

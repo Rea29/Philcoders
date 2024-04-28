@@ -108,8 +108,8 @@ const Shop = () => {
               <h6 className="text-left">{val.title}</h6>
               <h5 className="text-left">{val.description}</h5>
               <h5 className="text-left">₱{val.price}</h5>
-              <h5 className="text-left">instructorId: {val.InstructorName}</h5>
-              <h5 className="text-left">categoryId: {val.CategorName}</h5>
+              <h5 className="text-left">Instructor: {val.instructor_name}</h5>
+              <h5 className="text-left">Category: {val.category_name}</h5>
 
               <center>
                 <Link
