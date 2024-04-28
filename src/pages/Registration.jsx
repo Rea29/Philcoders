@@ -5,6 +5,10 @@ import Form from "react-bootstrap/Form";
 import Alert from "react-bootstrap/Alert";
 import { Button } from "react-bootstrap";
 import axios from "axios";
+import Swal from "sweetalert2";
+import SwalMessage from "../common/Swal";
+import Validation from "../common/Validation";
+import APIHelper from "../common/APIHelper";
 
 const Registration = (props) => {
   const [RegistrationData, setRegistrationData] = useState({
@@ -14,7 +18,9 @@ const Registration = (props) => {
     confirm_password: props.RegistrationData
       ? props.RegistrationData.confirm_password
       : "",
-    user_type: props.RegistrationData ? props.RegistrationData.user_type : "",
+    user_type: props.RegistrationData
+      ? props.RegistrationData.user_type
+      : "student",
   });
   const [errorMessage, setErrorMessage] = useState("");
   const [show, setShow] = useState(false);
@@ -36,46 +42,29 @@ const Registration = (props) => {
   const RegistrationFunc = async (event) => {
     event.preventDefault();
     const values = [name, email, password, confirm_password, user_type];
-
-    if (confirm_password != password) {
-      alert("Confirm password does not match");
+    console.log(RegistrationData);
+    if (Validation.Empty(RegistrationData.name)) {
+      SwalMessage.FullnameRequired();
+      return null;
+    } else if (
+      Validation.Empty(RegistrationData.email) ||
+      Validation.Email(RegistrationData.email)
+    ) {
+      SwalMessage.InvalidEmail();
+      return null;
+    } else if (Validation.Empty(RegistrationData.password)) {
+      SwalMessage.PasswordRequired();
+      return null;
+    } else if (confirm_password != password) {
+      SwalMessage.Error("Confirm password does not match!", "");
       return null;
     }
-    let errorMsg = "";
-    console.log();
-
-    setShowError(false);
-    setShow(false);
-
-    axios
-      .post("http://localhost:8000/api/register", {
-        name: RegistrationData.name,
-        email: RegistrationData.email,
-        password: RegistrationData.password,
-        password_confirmation: RegistrationData.confirm_password,
-        user_type: RegistrationData.user_type,
-      })
-      .then(function (response) {
-        if (response.data.isError) {
-          console.log(response.data);
-          setErrorMessage(String(response.data.message));
-          setShowError(true);
-        } else {
-          console.log(response.data);
-          setRegistrationResponseData(response.data);
-          setShow(true);
-          window.location = "/login";
-        }
-        alert(response.data.message);
-      })
-      .catch(function (error) {
-        console.error("Error:", error);
-        setErrorMessage(String(error.response.data.message));
-        setShowError(true);
-      });
-    const allFieldsFilled = values.every((field) => {
-      const value = `${field}`.trim();
-      return value !== "" && value !== "0";
+    APIHelper.CreateAccount({
+      name: RegistrationData.name,
+      email: RegistrationData.email,
+      password: RegistrationData.password,
+      password_confirmation: RegistrationData.confirm_password,
+      user_type: RegistrationData.user_type,
     });
   };
 
@@ -104,7 +93,6 @@ const Registration = (props) => {
                       onChange={handleInputChange}
                       className="form-control shadow-none"
                       autoComplete="off"
-                      required
                       placeholder=""
                     />
                   </div>
@@ -113,14 +101,13 @@ const Registration = (props) => {
                       Email:
                     </label>
                     <input
-                      type="email"
+                      type="text"
                       id="email"
                       name="email"
                       value={email}
                       onChange={handleInputChange}
                       className="form-control shadow-none"
                       autoComplete="off"
-                      required
                       placeholder=""
                     />
                   </div>
@@ -136,7 +123,6 @@ const Registration = (props) => {
                       onChange={handleInputChange}
                       className="form-control shadow-none"
                       autoComplete="off"
-                      required
                       placeholder=""
                     />
                   </div>
@@ -152,7 +138,6 @@ const Registration = (props) => {
                       onChange={handleInputChange}
                       className="form-control shadow-none"
                       autoComplete="off"
-                      required
                       placeholder=""
                     />
                   </div>

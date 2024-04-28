@@ -2,12 +2,23 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
 import axios from "axios";
-
+import SwalMessage from "../common/Swal";
+import Validation from "../common/Validation";
+import APIHelper from "../common/APIHelper";
 const CourseForm = (props) => {
   const { courseId } = useParams();
   const navigate = useNavigate();
 
   const [course, setcourse] = useState({
+    categoryId: props.course ? props.course.categoryId : "",
+    title: props.course ? props.course.title : "",
+    description: props.course ? props.course.description : "",
+    durationHours: props.course ? props.course.durationHours : "",
+    durationMinutes: props.course ? props.course.durationMinutes : "",
+    picUrl: props.course ? props.course.picUrl : "",
+    price: props.course ? props.course.price : "",
+  });
+  const [courseBackUp, setcourseBackUp] = useState({
     categoryId: props.course ? props.course.categoryId : "",
     title: props.course ? props.course.title : "",
     description: props.course ? props.course.description : "",
@@ -33,14 +44,7 @@ const CourseForm = (props) => {
     price,
   } = course;
   useEffect(() => {
-    console.log("courseId", "this the selected course id " + courseId);
-    let headers = {
-      Authorization: `Bearer ${localStorage.getItem("token")}`,
-      "Content-Type": "application/json",
-      Accept: "application/json",
-    };
-    axios
-      .get("http://localhost:8000/api/course/" + courseId, { headers })
+    APIHelper.CourseById(courseId)
       .then(function (response) {
         console.log("getcoursebyid", response.data);
         setcourse({
@@ -52,98 +56,82 @@ const CourseForm = (props) => {
           picUrl: response.data.picUrl,
           price: response.data.price,
         });
+        setcourseBackUp({
+          categoryId: response.data.categoryId,
+          title: response.data.title,
+          description: response.data.description,
+          durationHours: response.data.durationHours,
+          durationMinutes: response.data.durationMinutes,
+          picUrl: response.data.picUrl,
+          price: response.data.price,
+        });
         setSelectedCourse(response.data);
       })
       .catch(function (error) {
-        console.error("getcoursebyid Error:", error);
+        console.log("error", error);
+        if (error.code == "ERR_NETWORK") {
+          SwalMessage.ServerError();
+        }
       });
-
     // getCourses(null);
   }, []);
   useEffect(() => {
-    let headers = {
-      Authorization: `Bearer ${localStorage.getItem("token")}`,
-      "Content-Type": "application/json",
-      Accept: "application/json",
-    };
-    axios
-      .get("http://localhost:8000/api/categories", { headers })
+    APIHelper.Categories()
       .then((res) => {
         console.log(res);
 
         setCategoryData(res.data);
       })
-      .catch((error) => {
-        console.log(error);
+      .catch(function (error) {
+        console.log("error", error);
+        if (error.code == "ERR_NETWORK") {
+          SwalMessage.ServerError();
+        }
       });
 
     // getCourses(null);
   }, []);
   const handleOnSubmit = async (event) => {
     event.preventDefault();
-    const values = [
-      instructorId,
-      categoryId,
-      title,
-      description,
-      durationHours,
-      durationMinutes,
-      picUrl,
-      price,
-    ];
+
     let errorMsg = "";
-    console.log(course);
     let headers = {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
       "Content-Type": "application/json",
       Accept: "application/json",
     };
-    axios
-      .put(
-        "http://localhost:8000/api/update/course/" + courseId,
-        {
-          categoryId: course.categoryId,
-          title: course.title,
-          description: course.description,
-          durationHours: course.durationHours,
-          durationMinutes: course.durationMinutes,
-          picUrl: course.picUrl,
-          price: course.price,
-        },
-        { headers }
-      )
-      .then(function (response) {
-        console.log("update/course/", response.data);
-        if (response.data.hasError == false) {
-          alert(response.data.message);
-          navigate("/course-management");
-        } else {
-          alert(response.data.message);
-        }
-      })
-      .catch(function (error) {
-        console.error("update/course/ Error:", error);
-      });
-    const allFieldsFilled = values.every((field) => {
-      const value = `${field}`.trim();
-      return value !== "" && value !== "0";
-    });
+    console.log("courseBackUp, course", courseBackUp, course);
 
-    if (allFieldsFilled) {
-      const course = {
-        categoryId,
-        title,
-        description,
-        durationHours,
-        durationMinutes,
-        picUrl,
-        price,
-      };
-      props.handleOnSubmit(course);
-    } else {
-      errorMsg = "Please fill out all the fields.";
+    if (Validation.Compare2Array(courseBackUp, course)) {
+      SwalMessage.NoChanges();
+      return null;
     }
-    setErrorMsg(errorMsg);
+    if (Validation.Empty(course.title)) {
+      SwalMessage.TitleRequired();
+      return null;
+    } else if (
+      Validation.Empty(course.categoryId) ||
+      course.categoryId == "Select Category"
+    ) {
+      SwalMessage.SelectCategory();
+      return null;
+    } else if (Validation.Empty(course.description)) {
+      SwalMessage.DescriptionRequired();
+      return null;
+    } else if (Validation.Empty(course.durationHours)) {
+      SwalMessage.DurationHoursRequired();
+      return null;
+    } else if (Validation.Empty(course.durationMinutes)) {
+      SwalMessage.DurationMinutesRequired();
+      return null;
+    } else if (Validation.Empty(course.picUrl)) {
+      SwalMessage.PicUrlRequired();
+      return null;
+    } else if (Validation.Empty(course.price)) {
+      SwalMessage.PriceRequired();
+      return null;
+    }
+    APIHelper.UpdateCourse(course, courseId);
   };
 
   const handleInputChange = (event) => {
@@ -165,21 +153,8 @@ const CourseForm = (props) => {
         }));
     }
   };
-  function getSelectedOptionInstructor(data) {
-    if (data.instructorId == selectedCourse.instructorId) {
-      return (
-        <option value={data.instructorId} key={data.InstructorID} defaultValue>
-          {data.Name}
-        </option>
-      );
-    }
-    return (
-      <option value={data.instructorId} key={data.instructorId}>
-        {data.Name}
-      </option>
-    );
-  }
-  function getSelectedOptionCategory(data) {
+  const getSelectedOptionCategory = (data) => {
+    // function getSelectedOptionCategory(data) {
     console.log("getSelectedOptionCategory", data);
     if (data.id == selectedCourse.categoryId) {
       return (
@@ -193,7 +168,7 @@ const CourseForm = (props) => {
         {data.category_name}
       </option>
     );
-  }
+  };
   return (
     <div className="container my-2">
       <div className="row">

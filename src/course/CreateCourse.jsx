@@ -3,6 +3,9 @@ import React, { useEffect, useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import axios from "axios";
 import { useNavigate, useParams, Link } from "react-router-dom";
+import SwalMessage from "../common/Swal";
+import Validation from "../common/Validation";
+import APIHelper from "../common/APIHelper";
 
 const CourseForm = (props) => {
   const navigate = useNavigate();
@@ -38,48 +41,19 @@ const CourseForm = (props) => {
       "Content-Type": "application/json",
       Accept: "application/json",
     };
-    console.log(localStorage.getItem("token"));
-
-    axios
-      .get("http://127.0.0.1:8000/api/categories", {
-        headers,
+    APIHelper.Categories()
+      .then(function (response) {
+        setcategoryData(response.data);
       })
-      .then((res) => {
-        console.log(res);
-
-        setcategoryData(res.data);
-      })
-      .catch((error) => {
-        console.log(error);
+      .catch(function (error) {
+        console.log("error", error);
+        if (error.code == "ERR_NETWORK") {
+          SwalMessage.ServerError();
+        }
       });
 
     // getCourses(null);
   }, []);
-
-  // useEffect(() => {
-  //   let headers = {
-  //     Authorization: `Bearer ${localStorage.getItem("token")}`,
-  //     "Content-Type": "application/json",
-  //     Accept: "application/json",
-  //   };
-  //   console.log(localStorage.getItem("token"));
-
-  //   axios
-  //     .get("http://localhost:8000/api/instructor", {
-  //       headers,
-  //     })
-
-  //     .then((res) => {
-  //       console.log("getInstructor", res);
-
-  //       setInstructorData(res.data);
-  //     })
-  //     .catch((error) => {
-  //       console.log("getInstructor error", error);
-  //     });
-
-  //   // getCourses(null);
-  // }, []);
 
   const handleOnSubmit = async (event) => {
     event.preventDefault();
@@ -94,63 +68,32 @@ const CourseForm = (props) => {
       price,
       status,
     ];
-    let errorMsg = "";
-    console.log(course);
-    let headers = {
-      Authorization: `Bearer ${localStorage.getItem("token")}`,
-      "Content-Type": "application/json",
-      Accept: "application/json",
-    };
-    axios
-      .post(
-        "http://127.0.0.1:8000/api/create/course",
-        {
-          categoryId: course.categoryId,
-          title: course.title,
-          description: course.description,
-          durationHours: course.durationHours,
-          durationMinutes: course.durationMinutes,
-          picUrl: course.picUrl,
-          price: course.price,
-        },
-        {
-          headers,
-        }
-      )
-      .then(function (response) {
-        console.log("http://127.0.0.1:8000/api/create/course", response.data);
-        if (response.data.instructorId > 0) {
-          alert("Course successfully created");
-          navigate("/course-management");
-        }
-      })
-      .catch(function (error) {
-        console.error(
-          "http://127.0.0.1:8000/api/create/course",
-          "Error:",
-          error
-        );
-      });
-    const allFieldsFilled = values.every((field) => {
-      const value = `${field}`.trim();
-      return value !== "" && value !== "0";
-    });
-
-    if (allFieldsFilled) {
-      const course = {
-        categoryId,
-        title,
-        description,
-        durationHours,
-        durationMinutes,
-        picUrl,
-        price,
-      };
-      props.handleOnSubmit(course);
-    } else {
-      errorMsg = "Please fill out all the fields.";
+    if (Validation.Empty(course.title)) {
+      SwalMessage.TitleRequired();
+      return null;
+    } else if (
+      Validation.Empty(course.categoryId) ||
+      course.categoryId == "Select Category"
+    ) {
+      SwalMessage.SelectCategory();
+      return null;
+    } else if (Validation.Empty(course.description)) {
+      SwalMessage.DescriptionRequired();
+      return null;
+    } else if (Validation.Empty(course.durationHours)) {
+      SwalMessage.DurationHoursRequired();
+      return null;
+    } else if (Validation.Empty(course.durationMinutes)) {
+      SwalMessage.DurationMinutesRequired();
+      return null;
+    } else if (Validation.Empty(course.picUrl)) {
+      SwalMessage.PicUrlRequired();
+      return null;
+    } else if (Validation.Empty(course.price)) {
+      SwalMessage.PriceRequired();
+      return null;
     }
-    setErrorMsg(errorMsg);
+    APIHelper.CreateCourse();
   };
 
   const handleInputChange = (event) => {
@@ -164,7 +107,22 @@ const CourseForm = (props) => {
           }));
         }
         break;
-
+      case "durationHours":
+        if (value === "" || value.match(/^\d+$/)) {
+          setcourse((prevState) => ({
+            ...prevState,
+            [name]: value,
+          }));
+        }
+        break;
+      case "durationMinutes":
+        if (value === "" || value.match(/^\d+$/)) {
+          setcourse((prevState) => ({
+            ...prevState,
+            [name]: value,
+          }));
+        }
+        break;
       default:
         setcourse((prevState) => ({
           ...prevState,
@@ -220,7 +178,9 @@ const CourseForm = (props) => {
                 value={categoryId}
                 onChange={handleInputChange}
               >
-                <option>Select Category</option>
+                {/* <option Selected disabled>
+                  Select Category
+                </option> */}
                 {/* <option value="1">One</option> */}
                 {categoryData.map((val) => (
                   <option value={val.id} key={val.id}>
@@ -271,7 +231,7 @@ const CourseForm = (props) => {
               <br />
             </Form.Group>
             <Form.Group controlId="Pic_Url">
-              <Form.Label>Picture Url</Form.Label>
+              <Form.Label>Image Url</Form.Label>
               <Form.Control
                 className="input-control"
                 type="text"
