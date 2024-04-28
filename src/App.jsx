@@ -49,7 +49,7 @@ function App() {
       }
     }
 
-    temp.push("Login", "Register", "Home", "About");
+    temp.push("Login", "Register", "Home", "About", "Contact");
 
     const routesComponents = [
       {
@@ -136,6 +136,17 @@ function App() {
           <>
             <Navbar Logged={userData} />
             <CreateCourse />
+            <Footer />
+          </>
+        ),
+      },
+      {
+        name: "Course",
+        path: "/Course",
+        component: (
+          <>
+            <Navbar Logged={userData} />
+            <Course />
             <Footer />
           </>
         ),

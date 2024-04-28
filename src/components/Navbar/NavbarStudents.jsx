@@ -9,6 +9,8 @@ import axios from "axios"; //npm install axios --save
 function studentnavbar(props) {
   const handleClick = (e) => {
     e.preventDefault();
+    localStorage.removeItem("token");
+    localStorage.clear();
     let headers = {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
       "Content-Type": "application/json",
@@ -20,7 +22,10 @@ function studentnavbar(props) {
       })
       .then(function (response) {
         console.log(response.data);
-        localStorage.removeItem("token");
+
+        window.location = "/";
+      })
+      .catch(function (error) {
         window.location = "/";
       });
   };

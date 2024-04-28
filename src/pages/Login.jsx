@@ -8,7 +8,9 @@ import DropdownButton from "react-bootstrap/DropdownButton";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Alert from "react-bootstrap/Alert";
 import { useNavigate } from "react-router-dom";
-import Swal from "sweetalert2";
+import SwalMessage from "../common/Swal";
+import Validation from "../common/Validation";
+import APIHelper from "../common/APIHelper";
 
 const Login = (props) => {
   const navigate = useNavigate();
@@ -39,74 +41,19 @@ const Login = (props) => {
 
     const isValidEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
 
-    if (loginData.email && loginData.email.match(isValidEmail)) {
+    if (
+      Validation.Empty(loginData.email) ||
+      Validation.Email(loginData.email)
+    ) {
+      SwalMessage.Error("Email", "Please enter a valid email addres!");
+      return null;
+    } else if (Validation.Empty(loginData.password)) {
       // return null;
-    } else {
-      Swal.fire({
-        title: "Email",
-        text: "Please enter a valid email addres!",
-        icon: "error",
-      });
+      SwalMessage.Error("Password is required!", "");
       return null;
     }
     const values = [email, password];
-    let errorMsg = "";
-    console.log(loginData);
-    let headers = {
-      // Authorization: `Bearer ${localStorage.getItem("token")}`,
-      "Content-Type": "application/json",
-      Accept: "application/json",
-    };
-    axios
-      .post(
-        "http://localhost:8000/api/login",
-        {
-          email: loginData.email,
-          password: loginData.password,
-        },
-        {
-          headers: headers,
-        }
-      )
-      .then(function (response) {
-        // localStorage.setItem("token");
-        console.log(response.data);
-        if (response.data.isError) {
-          // setErrorMessage(String(response.data.message));
-          // setShowError(true);
-          Swal.fire({
-            title: response.data.message,
-            // text: "That thing is still around?",
-            icon: "error",
-          });
-          return null;
-        } else {
-          localStorage.setItem("token", response.data.token);
-          // setLoginResponseData(response.data);
-
-          console.log("token ", localStorage.getItem("token"));
-          window.location = "/";
-          Swal.fire({
-            title: response.data.message,
-            // text: "That thing is still around?",
-            icon: "success",
-          });
-        }
-        // alert(response.data.message);
-      })
-      .catch(function (error) {
-        Swal.fire({
-          title: "Server Error",
-          text: "Please wait while we fix this problem. Thank you!",
-          icon: "error",
-        });
-        // setErrorMessage(String(error.response.data.message));
-        // setShowError(true);
-      });
-    const allFieldsFilled = values.every((field) => {
-      const value = `${field}`.trim();
-      return value !== "" && value !== "0";
-    });
+    APIHelper.Login(loginData);
   };
 
   return (
