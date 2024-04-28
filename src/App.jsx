@@ -29,24 +29,27 @@ function App() {
   // const [userType, setUserType] = useState("");
   const [userData, setUserData] = useState([]);
   const [filteredRoute, setFilteredRoute] = useState([]);
-
+  const [isLoading, setLoading] = useState(true);
+  // var userData = [];
   useEffect(() => {
     // getLoggedUserData();
-    runInit();
-  }, []);
+    runApi();
+    renderRoutes();
+  }, [isLoading]);
   const renderRoutes = () => {
-    // if (typeof userData.user != "undefined") {
-    //   if (
-    //     userData.user.ModuleAccess != "" ||
-    //     userData.user.ModuleAccess != null ||
-    //     typeof userData.user.ModuleAccess != "undefined"
-    //   ) {
-    //     // var str = "Home,About";
-
-    //     temp = userData.user.ModuleAccess.split(",");
-    //   }
-    // }
     var temp = new Array();
+    if (typeof userData.user != "undefined") {
+      if (
+        userData.user.ModuleAccess != "" ||
+        userData.user.ModuleAccess != null ||
+        typeof userData.user.ModuleAccess != "undefined"
+      ) {
+        // var str = "Home,About";
+
+        temp = userData.user.ModuleAccess.split(",");
+      }
+    }
+
     temp.push("Login", "Register", "Home", "About");
     console.log(temp);
     console.log("userData", userData);
@@ -145,9 +148,8 @@ function App() {
     });
     setFilteredRoute(filtered);
     console.log("filteredRoute", filtered);
-    return null;
   };
-  const runApi = () => {
+  const runApi = async () => {
     let headers = {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
       "Content-Type": "application/json",
@@ -162,14 +164,12 @@ function App() {
         .then(function (response) {
           console.log("http://localhost:8000/api/user-info", response.data);
           setUserData(response.data);
+          // userData = response.data;
+          setLoading(false);
         });
     }
-    return null;
   };
-  async function runInit() {
-    await runApi();
-    await renderRoutes();
-  }
+
   // You can declare this in `App.js`, but it might
   // be better to move it to its own file.
   return (

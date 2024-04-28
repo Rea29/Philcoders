@@ -39,7 +39,7 @@ import MessageAlert from "../components/PopupMessage";
 import "./css/Home.css";
 
 const Home = (props) => {
-  console.log(props);
+  // console.log(props);
   return (
     <>
       <Carousel>

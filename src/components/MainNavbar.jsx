@@ -10,7 +10,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios"; //npm install axios --save
 import { Link, useNavigate, NavLink } from "react-router-dom";
 function samplenav({ Logged }) {
-  console.log("logged", Logged);
+  // console.log("logged", Logged);
   const [userFullName, setUserFullName] = useState("");
   const [userType, setUserType] = useState("");
   const [userData, setUserData] = useState(Logged);
@@ -18,7 +18,7 @@ function samplenav({ Logged }) {
     // getLoggedUserData();
   }, []);
   const RenderNavbar = (user) => {
-    console.log("RenderNavbar", user);
+    // console.log("RenderNavbar", user);
     if (user.user) {
       if (user.user.user_type == "student") {
         return <NavbarStudents name={user} />;
