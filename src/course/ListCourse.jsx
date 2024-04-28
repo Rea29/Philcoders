@@ -52,7 +52,7 @@ export default function ListUser() {
   return (
     <div className="row roomfac">
       <div className="col-10">
-        <Link to="/create-course" className="btn btn-success">
+        <Link to="/CreateCourse" className="btn btn-success">
           Add Course
         </Link>
         <br />

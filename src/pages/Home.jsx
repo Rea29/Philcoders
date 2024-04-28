@@ -35,10 +35,11 @@ import Photography from "../images/Photography.png";
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
-import MessageAlert from ".././components/PopupMessage";
+import MessageAlert from "../components/PopupMessage";
 import "./css/Home.css";
 
-const Home = () => {
+const Home = (props) => {
+  console.log(props);
   return (
     <>
       <Carousel>

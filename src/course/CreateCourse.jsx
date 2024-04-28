@@ -41,7 +41,7 @@ const CourseForm = (props) => {
     console.log(localStorage.getItem("token"));
 
     axios
-      .get("http://localhost:8000/api/categories", {
+      .get("http://127.0.0.1:8000/api/categories", {
         headers,
       })
       .then((res) => {
@@ -103,7 +103,7 @@ const CourseForm = (props) => {
     };
     axios
       .post(
-        "http://localhost:8000/api/create/course",
+        "http://127.0.0.1:8000/api/create/course",
         {
           categoryId: course.categoryId,
           title: course.title,
@@ -118,7 +118,7 @@ const CourseForm = (props) => {
         }
       )
       .then(function (response) {
-        console.log("http://localhost:8000/api/create/course", response.data);
+        console.log("http://127.0.0.1:8000/api/create/course", response.data);
         if (response.data.instructorId > 0) {
           alert("Course successfully created");
           navigate("/course-management");
@@ -126,7 +126,7 @@ const CourseForm = (props) => {
       })
       .catch(function (error) {
         console.error(
-          "http://localhost:8000/api/create/course",
+          "http://127.0.0.1:8000/api/create/course",
           "Error:",
           error
         );
