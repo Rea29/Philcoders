@@ -31,10 +31,123 @@ function App() {
   const [filteredRoute, setFilteredRoute] = useState([]);
 
   useEffect(() => {
-    getLoggedUserData();
+    // getLoggedUserData();
+    runInit();
   }, []);
-  const getLoggedUserData = () => {
-    //function getLoggedUserData() {
+  const renderRoutes = () => {
+    // if (typeof userData.user != "undefined") {
+    //   if (
+    //     userData.user.ModuleAccess != "" ||
+    //     userData.user.ModuleAccess != null ||
+    //     typeof userData.user.ModuleAccess != "undefined"
+    //   ) {
+    //     // var str = "Home,About";
+
+    //     temp = userData.user.ModuleAccess.split(",");
+    //   }
+    // }
+    var temp = new Array();
+    temp.push("Login", "Register", "Home", "About");
+    console.log(temp);
+    console.log("userData", userData);
+    const routesComponents = [
+      {
+        name: "Home",
+        path: "/",
+        component: (
+          <>
+            <Navbar Logged={userData} />
+            <Home />
+            <Footer />
+          </>
+        ),
+      },
+      {
+        name: "About",
+        path: "/About",
+        component: (
+          <>
+            <Navbar Logged={userData} />
+            <About />
+            <Footer />
+          </>
+        ),
+      },
+      {
+        name: "Login",
+        path: "/Login",
+        component: (
+          <>
+            <Navbar Logged={userData} />
+            <Login />
+            <Footer />
+          </>
+        ),
+      },
+      {
+        name: "Register",
+        path: "/Registration",
+        component: (
+          <>
+            <Navbar Logged={userData} />
+            <Registration />
+            <Footer />
+          </>
+        ),
+      },
+      {
+        name: "Contact",
+        path: "/Contact",
+        component: (
+          <>
+            <Navbar Logged={userData} />
+            <Contact />
+            <Footer />
+          </>
+        ),
+      },
+      {
+        name: "CourseManagement",
+        path: "/Course-Management",
+        component: (
+          <>
+            <Navbar Logged={userData} />
+            <CourseManagement />
+            <Footer />
+          </>
+        ),
+      },
+      {
+        name: "EditCourse",
+        path: "/Edit-Course/:courseId",
+        component: (
+          <>
+            <Navbar Logged={userData} />
+            <EditCourseForm />
+            <Footer />
+          </>
+        ),
+      },
+      {
+        name: "CreateCourse",
+        path: "/CreateCourse",
+        component: (
+          <>
+            <Navbar Logged={userData} />
+            <CreateCourse />
+            <Footer />
+          </>
+        ),
+      },
+    ];
+    const filtered = routesComponents.filter((item) => {
+      return temp.includes(item.name);
+    });
+    setFilteredRoute(filtered);
+    console.log("filteredRoute", filtered);
+    return null;
+  };
+  const runApi = () => {
     let headers = {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
       "Content-Type": "application/json",
@@ -47,117 +160,16 @@ function App() {
           headers,
         })
         .then(function (response) {
-          var temp = new Array();
-          if (
-            response.data.user.ModuleAccess != "" ||
-            response.data.user.ModuleAccess != null ||
-            typeof response.data.user.ModuleAccess != "undefined"
-          ) {
-            // var str = "Home,About";
-
-            temp = response.data.user.ModuleAccess.split(",");
-          }
-          temp.push("Login", "Register", "Home", "About");
-          console.log(temp);
-          const routesComponents = [
-            {
-              name: "Home",
-              path: "/",
-              component: (
-                <>
-                  <Navbar Logged={response.data} />
-                  <Home />
-                  <Footer />
-                </>
-              ),
-            },
-            {
-              name: "About",
-              path: "/About",
-              component: (
-                <>
-                  <Navbar Logged={response.data} />
-                  <About />
-                  <Footer />
-                </>
-              ),
-            },
-            {
-              name: "Login",
-              path: "/Login",
-              component: (
-                <>
-                  <Navbar Logged={response.data} />
-                  <Login />
-                  <Footer />
-                </>
-              ),
-            },
-            {
-              name: "Register",
-              path: "/Registration",
-              component: (
-                <>
-                  <Navbar Logged={response.data} />
-                  <Registration />
-                  <Footer />
-                </>
-              ),
-            },
-            {
-              name: "Contact",
-              path: "/Contact",
-              component: (
-                <>
-                  <Navbar Logged={response.data} />
-                  <Contact />
-                  <Footer />
-                </>
-              ),
-            },
-            {
-              name: "CourseManagement",
-              path: "/Course-Management",
-              component: (
-                <>
-                  <Navbar Logged={response.data} />
-                  <CourseManagement />
-                  <Footer />
-                </>
-              ),
-            },
-            {
-              name: "EditCourse",
-              path: "/Edit-Course/:courseId",
-              component: (
-                <>
-                  <Navbar Logged={response.data} />
-                  <EditCourseForm />
-                  <Footer />
-                </>
-              ),
-            },
-            {
-              name: "CreateCourse",
-              path: "/CreateCourse",
-              component: (
-                <>
-                  <Navbar Logged={response.data} />
-                  <CreateCourse />
-                  <Footer />
-                </>
-              ),
-            },
-          ];
-          const filtered = routesComponents.filter((item) => {
-            return temp.includes(item.name);
-          });
-          setFilteredRoute(filtered);
-          console.log("filteredRoute", filtered);
+          console.log("http://localhost:8000/api/user-info", response.data);
+          setUserData(response.data);
         });
     }
+    return null;
   };
-
+  async function runInit() {
+    await runApi();
+    await renderRoutes();
+  }
   // You can declare this in `App.js`, but it might
   // be better to move it to its own file.
   return (
